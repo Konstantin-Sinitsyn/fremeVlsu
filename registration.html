@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Регистрация</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!--<style>body{opacity: 0;}</style>-->
+	<link rel="stylesheet" href="css/style.min.css?_v=20220417164721">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="loader-wrapper">
+		<div class="preloader">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__wrapper">
+				<div class="header__container __container">
+					<div class="header__body">
+						<div class="header__language language">
+							<a href="#" class="language__item _active">RU</a>
+							<a href="#" class="language__item">EN</a>
+						</div>
+						<a href="home.html" class="header__logo"><picture><source srcset="img/logo.webp" type="image/webp"><img class='header__logo_img' src="img/logo.png" alt="logo"></picture></a>
+						<div class="header__menu menu">
+							<nav class="menu__body">
+								<ul class="menu__list">
+									<li class="menu__item"><a href="home.html#about" class="menu__link">О ФРЭМЭ</a></li>
+									<li class="menu__item"><a href="home.html#committees" class="menu__link">Комитет</a></li>
+									<li class="menu__item"><a href="home.html#topics" class="menu__link">Тематика</a></li>
+									<li class="menu__item"><a href="home.html#school" class="menu__link">Школа</a></li>
+									<li class="menu__item"><a href="home.html#dates" class="menu__link">Даты</a></li>
+									<li class="menu__item"><a href="home.html#participants" class="menu__link">Участникам</a></li>
+									<li class="menu__item"><a href="home.html#contacts" class="menu__link">Контакты</a></li>
+								</ul>
+							</nav>
+						</div>
+						<a href="registration.html" class="button header__button">Принять участие</a>
+						<button type="button" class="menu__icon icon-menu"><span></span></button>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="registration__wrapper">
+			<div class="registration__container __container">
+				<h1 class="title">Регистрация участника конференции</h1>
+				<p class="subtitle">Информация об участнике:</p>
+				<form data-goto-error data-ajax method="POST" action="sendmail.php" class="registration__form form">
+					<div class="form__group">
+						<label for="Input" class="form-group__label">АВТОР УЧАСТНИК (ФИО):</label>
+						<input type="text" autocomplete="off" name="fio" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ:</label>
+						<input type="email" autocomplete="off" name="email" id="Input" class="input form-group__input" data-required="email">
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ТЕЛЕФОН:</label>
+						<input type="tel" autocomplete="off" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ:</label>
+						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ГОРОД:</label>
+						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ДОЛЖНОСТЬ:</label>
+						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">УЧЁНАЯ СТЕПЕНЬ/ЗВАНИЕ:</label>
+						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ВИД УЧАСТИЯ:</label>
+						<select name="form[]" class="form" data-required>
+							<option value="" selected>Выбрать</option>
+							<option value="1">Докладчик</option>
+							<option value="2">Слушатель</option>
+						</select>
+					</div>
+					<br>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">НАЗВАНИЕ СТАТЬИ(RU):</label>
+						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Укажите название статьи на русском языке</span>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">НАЗВАНИЕ СТАТЬИ(EN):</label>
+						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Укажите название статьи на английском языке</span>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(RU)</label>
+						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Например:<br>1. к.т.н.,доцент,преподаватель Иванов И.И.<br>2. д.т.н.,профессор Смирнов С.С.</span>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(EN)</label>
+						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Например:<br>1. Can.Tech.Sci, assistant professor Ivanov I.I.<br>2. Dr.Tech.Sci, professor Smirnov S.S.</span>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(RU)</label>
+						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Укажите организацию и город авторов на русском языке.Например:<br>1. Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный Университет,С.-Петербург</span>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(EN)</label>
+						<textarea id="Input" class="form-group__input adaptive-height" name="annotation" data-required></textarea>
+						<span class="form-group__help">Укажите организацию и город авторов на английском языке.Например:<br>1. Moscow State University,Moscow<br>2. S.-PetersburgStateUniversity,S.-Petersburg</span>
+					</div>
+					<p class="subtitle">ПРИКРЕПИТЬ ФАЙЛЫ:</p>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">Файл статьи:</label>
+						<input type="file" autocomplete="off" name="article" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">Файл аннотации:</label>
+						<input type="file" autocomplete="off" name="annotation" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">Акт экспертизы:</label>
+						<input type="file" autocomplete="off" name="expertise" class="input form-group__input" data-required>
+					</div>
+					<div class="form__group">
+						<button type="submit" name="submit_button" class="form-group__button">Отправить</button>
+						<div class="checkbox">
+							<input id="c_1" data-error="Подтвердите свое согласие на обработку персональных данных!" class="checkbox__input" type="checkbox" data-required>
+							<label for="c_1" class="checkbox__label"><span class="checkbox__text">Нажимая на кнопку вы подтверждаете свое согласие на обработку <a class="form-group__link" href="privacy.html" target="__blank">персональных&nbsp;данных</a>.</span></label>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="footer__container __container">
+				<div class="footer__body">
+					<a href="#" class="footer__logo">ФРЭМЭ`2022</a>
+					<h2 class="footer__title">15-я Международная Научная Конференция "Физика и Радиоэлектроника в Медицине и Экологии"</h2>
+					<ul class="footer__list list-footer">
+						<li class="list-footer__item"><a href="home.html#about" class="list-footer__link">О ФРЭМЭ</a></li>
+						<li class="list-footer__item"><a href="home.html#committees" class="list-footer__link">Тематика</a></li>
+						<li class="list-footer__item"><a href="home.html#topics" class="list-footer__link">Комитеты</a></li>
+						<li class="list-footer__item"><a href="home.html#school" class="list-footer__link">Школа</a></li>
+						<li class="list-footer__item"><a href="home.html#dates" class="list-footer__link">Даты</a></li>
+						<li class="list-footer__item"><a href="home.html#participants" class="list-footer__link">Участникам</a></li>
+						<li class="list-footer__item"><a href="home.html#contacts" class="list-footer__link">Контакты</a></li>
+					</ul>
+				</div>
+				<div class="footer__panel">
+					<span class="footer__copyright">&copy; 2022 ФРЭМЭ. Все права защищены.</span>
+					<a href="https://teletype.link/s.konstantin" target="_blank" class="footer__developer">Разработка сайта - Konstantin.S</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="js/app.min.js?_v=20220417164721"></script>
+</body>
+
+</html>
