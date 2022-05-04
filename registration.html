@@ -6,10 +6,14 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!--<style>body{opacity: 0;}</style>-->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220417164721">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220430234716">
 	<link rel="shortcut icon" href="favicon.ico">
-	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="description" content='XV Международная Научная Конференция "Физика и Радиоэлектроника в
+	Медицине и Экологии"'>
+	<meta name="keywords" content="ФРЭМЭ, ВлГУ, Владимир, Конференция, Медицина, Экология, Радиотехника">
+	<meta name="robots" content="index, nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="yandex-verification" content="cbf18076454326d7" />
 </head>
 
 <body>
@@ -53,7 +57,7 @@
 			<div class="registration__container __container">
 				<h1 class="title">Регистрация участника конференции</h1>
 				<p class="subtitle">Информация об участнике:</p>
-				<form data-goto-error data-ajax method="POST" action="sendmail.php" class="registration__form form">
+				<form data-goto-error method="POST" action="sendmail.php" class="registration__form form" enctype="multipart/form-data">
 					<div class="form__group">
 						<label for="Input" class="form-group__label">АВТОР УЧАСТНИК (ФИО):</label>
 						<input type="text" autocomplete="off" name="fio" id="Input" class="input form-group__input" data-required>
@@ -64,64 +68,81 @@
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">ТЕЛЕФОН:</label>
-						<input type="tel" autocomplete="off" id="Input" class="input form-group__input" data-required>
+						<input type="tel" autocomplete="off" name="tel" id="Input" class="input form-group__input" data-required>
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ:</label>
-						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+						<input type="text" autocomplete="off" name="organization" id="Input" class="input form-group__input" data-required>
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">ГОРОД:</label>
-						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+						<input type="text" autocomplete="off" name="city" id="Input" class="input form-group__input" data-required>
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">ДОЛЖНОСТЬ:</label>
-						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
+						<input type="text" autocomplete="off" name="jobTitle" id="Input" class="input form-group__input" data-required>
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">УЧЁНАЯ СТЕПЕНЬ/ЗВАНИЕ:</label>
-						<input type="text" autocomplete="off" id="Input" class="input form-group__input" data-required>
-					</div>
-					<div class="form__group">
-						<label for="Input" class="form-group__label">ВИД УЧАСТИЯ:</label>
-						<select name="form[]" class="form" data-required>
-							<option value="" selected>Выбрать</option>
-							<option value="1">Докладчик</option>
-							<option value="2">Слушатель</option>
-						</select>
+						<input type="text" autocomplete="off" name="academicDegree" id="Input" class="input form-group__input" data-required>
 					</div>
 					<br>
+					<p class="subtitle">Информация о статье:</p>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">НАЗВАНИЕ СТАТЬИ(RU):</label>
-						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<textarea name="articleTitleRU" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
 						<span class="form-group__help">Укажите название статьи на русском языке</span>
 					</div>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">НАЗВАНИЕ СТАТЬИ(EN):</label>
-						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<textarea name="articleTitleEN" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
 						<span class="form-group__help">Укажите название статьи на английском языке</span>
 					</div>
 					<div class="form__group">
-						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(RU)</label>
-						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
-						<span class="form-group__help">Например:<br>1. к.т.н.,доцент,преподаватель Иванов И.И.<br>2. д.т.н.,профессор Смирнов С.С.</span>
+						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(RU):</label>
+						<textarea name="authorInformationRU" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Например:<br>1. к.т.н.,доцент,преподаватель Иванов И.И.<br>2.
+							д.т.н.,профессор Смирнов С.С.</span>
 					</div>
 					<div class="form__group">
-						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(EN)</label>
-						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
-						<span class="form-group__help">Например:<br>1. Can.Tech.Sci, assistant professor Ivanov I.I.<br>2. Dr.Tech.Sci, professor Smirnov S.S.</span>
+						<label for="Input" class="form-group__label">ИНФОРМАЦИЯ ОБ АВТОРАХ(EN):</label>
+						<textarea name="authorInformationEN" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Например:<br>1. Can.Tech.Sci, assistant professor Ivanov I.I.<br>2.
+							Dr.Tech.Sci, professor Smirnov S.S.</span>
 					</div>
 					<div class="form__group">
-						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(RU)</label>
-						<textarea id="Input" class="form-group__input adaptive-height" data-required></textarea>
-						<span class="form-group__help">Укажите организацию и город авторов на русском языке.Например:<br>1. Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный Университет,С.-Петербург</span>
+						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(RU):</label>
+						<textarea name="organizationCityAuthorsRU" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Укажите организацию и город авторов на русском языке.Например:<br>1.
+							Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный
+							Университет,С.-Петербург</span>
 					</div>
 					<div class="form__group">
-						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(EN)</label>
-						<textarea id="Input" class="form-group__input adaptive-height" name="annotation" data-required></textarea>
-						<span class="form-group__help">Укажите организацию и город авторов на английском языке.Например:<br>1. Moscow State University,Moscow<br>2. S.-PetersburgStateUniversity,S.-Petersburg</span>
+						<label for="Input" class="form-group__label">ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(EN):</label>
+						<textarea name="organizationCityAuthorsEN" autocomplete="off" id="Input" class="form-group__input adaptive-height" data-required></textarea>
+						<span class="form-group__help">Укажите организацию и город авторов на английском языке.Например:<br>1.
+							Moscow State University,Moscow<br>2. S.-PetersburgStateUniversity,S.-Petersburg</span>
 					</div>
-					<p class="subtitle">ПРИКРЕПИТЬ ФАЙЛЫ:</p>
+					<br>
+					<p class="subtitle">Данные виде участия:</p>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">ВИД УЧАСТИЯ:</label>
+						<select name="typeParticipation" class="form" data-required>
+							<option value="" selected>Выбрать</option>
+							<option value="Докладчик">Докладчик</option>
+							<option value="Слушатель">Слушатель</option>
+						</select>
+					</div>
+					<div class="checkbox">
+						<input id="c_2" class="checkbox__input" type="checkbox" value="нужна" name="hotel">
+						<label for="c_2" class="checkbox__label"><span class="checkbox__text_bold">Нужна гостиница</span></label>
+					</div>
+					<br>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">Выберите даты бронирования гостиницы:</label>
+						<input type="text" id="datepicker" autocomplete="off" class="form-group__input" name="bookingDate">
+					</div>
+					<p class="subtitle">Прикрепить файлы:</p>
 					<div class="form__group">
 						<label for="Input" class="form-group__label">Файл статьи:</label>
 						<input type="file" autocomplete="off" name="article" class="input form-group__input" data-required>
@@ -134,14 +155,54 @@
 						<label for="Input" class="form-group__label">Акт экспертизы:</label>
 						<input type="file" autocomplete="off" name="expertise" class="input form-group__input" data-required>
 					</div>
+					<p class="subtitle">Оплата оргвзноса:</p>
+					<div class="contribution">
+						<div class="contribution__item"><img src="img/QR-code_platiqr_30_Apr_2022_17-27-18.svg" alt="QR код для оплаты" class="contribution__img"></div>
+						<div class="contribution__item">
+							<p class="spollers__text"><b>Реквизиты для оплаты оргвзноса:</b>
+								Р/с № 40703810910020100121 во Владимирском ОСБ №8611 РФ г. Владимира, БИК
+								041708602, к/с 30101810000000000602, получатель платежа – Владимирская
+								региональная общественная организация РНТО РЭС им. А.С.Попова, ИНН
+								3327702155/КПП 332701001, с пометкой «Оргвзнос за участие в конференции
+								ФРЭМЭ’2022».</p>
+						</div>
+					</div>
+					<br>
+					<table class="iksweb">
+						<tbody>
+							<tr>
+								<td>Для участников конференции</td>
+								<td>1000 рублей</td>
+							</tr>
+							<tr>
+								<td>Для молодых ученых(до 33 лет) и апирантов(при предоставления
+									удостоерения)</td>
+								<td>800 рублей</td>
+							</tr>
+							<tr>
+								<td>Заочное участие</td>
+								<td>500 рублей</td>
+							</tr>
+							<tr>
+								<td>Для иностранных участников</td>
+								<td>100 евро</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="form__group">
+						<label for="Input" class="form-group__label">Чек об оплате оргвзноса:</label>
+						<input type="file" autocomplete="off" name="check" class="input form-group__input">
+					</div>
+					<br>
 					<div class="form__group">
 						<button type="submit" name="submit_button" class="form-group__button">Отправить</button>
 						<div class="checkbox">
 							<input id="c_1" data-error="Подтвердите свое согласие на обработку персональных данных!" class="checkbox__input" type="checkbox" data-required>
-							<label for="c_1" class="checkbox__label"><span class="checkbox__text">Нажимая на кнопку вы подтверждаете свое согласие на обработку <a class="form-group__link" href="privacy.html" target="__blank">персональных&nbsp;данных</a>.</span></label>
+							<label for="c_1" class="checkbox__label"><span class="checkbox__text">Нажимая на кнопку вы подтверждаете
+									свое согласие на обработку <a class="form-group__link" href="privacy.html" target="__blank">персональных&nbsp;данных</a>.</span></label>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>
@@ -167,7 +228,7 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20220417164721"></script>
+	<script src="js/app.min.js?_v=20220430234716"></script>
 </body>
 
 </html>
