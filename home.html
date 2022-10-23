@@ -5,14 +5,92 @@
 	<title>ФРЭМЭ`2022</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<!--<style>body{opacity: 0;}</style>-->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220430234716">
+	<style>
+		.loader-wrapper {
+			width: 100vw;
+			height: 100vh;
+			background-color: #fff;
+			position: fixed;
+			z-index: 999;
+			overflow: hidden
+		}
+
+		.loaded .loader-wrapper {
+			visibility: hidden;
+			transform: translateY(-100%);
+			transition: all 0.3s 1s ease-out;
+		}
+
+		.preloader {
+			position: relative;
+			width: 80px;
+			height: 80px;
+			top: 45%;
+			margin: 0 auto;
+		}
+
+		.preloader span {
+			position: absolute;
+			border: 8px solid #00B140;
+			border-top: 8px solid transparent;
+			border-radius: 999px;
+		}
+
+		.preloader span:nth-child(1) {
+			width: 80px;
+			height: 80px;
+			animation: spin-1 2s infinite linear;
+		}
+
+		.preloader span:nth-child(2) {
+			top: 20px;
+			left: 20px;
+			width: 40px;
+			height: 40px;
+			animation: spin-2 1s infinite linear;
+		}
+
+		@keyframes spin-1 {
+			0% {
+				transform: rotate(360deg);
+				opacity: 1;
+			}
+
+			50% {
+				transform: rotate(180deg);
+				opacity: 0.5;
+			}
+
+			100% {
+				transform: rotate(0deg);
+				opacity: 1;
+			}
+		}
+
+		@keyframes spin-2 {
+			0% {
+				transform: rotate(0deg);
+				opacity: 0.5;
+			}
+
+			50% {
+				transform: rotate(180deg);
+				opacity: 1;
+			}
+
+			100% {
+				transform: rotate(360deg);
+				opacity: 0.5;
+			}
+		}
+	</style>
+	<link rel="stylesheet" href="css/style.min.css?_v=20221023144845">
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta name="description" content='XV Международная Научная Конференция "Физика и Радиоэлектроника в
 	Медицине и Экологии"'>
 	<meta name="keywords" content="ФРЭМЭ, ВлГУ, Владимир, Конференция, Медицина, Экология, Радиотехника">
 	<meta name="robots" content="index, nofollow">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, minimal-ui">
 	<meta name="yandex-verification" content="cbf18076454326d7" />
 </head>
 
@@ -29,50 +107,70 @@
 				<div class="header__container __container">
 					<div class="header__body">
 						<div class="header__language language">
-							<a href="#" class="language__item _active">RU</a>
-							<a href="#" class="language__item">EN</a>
+							<a href="#RU" class="language__item _active">RU</a>
+							<a href="#EN" class="language__item">EN</a>
 						</div>
-						<a href="home.html" class="header__logo" data-goto="#page"><picture><source srcset="img/logo.webp" type="image/webp"><img class='header__logo_img' src="img/logo.png" alt="logo"></picture></a>
+						<a href="home.html" class="header__logo" data-goto="#page">
+							<picture>
+								<source srcset="img/logo.webp" type="image/webp"><img class='header__logo_img'
+									src="img/logo.png" alt="logo"></picture>
+						</a>
 						<div class="header__menu menu">
 							<nav class="menu__body">
 								<ul class="menu__list">
-									<li class="menu__item"><a href="#about" class="menu__link" data-goto="#about" data-goto-top="100">О ФРЭМЭ</a></li>
-									<li class="menu__item"><a href="#committees" class="menu__link" data-goto="#committees" data-goto-top="100">Комитет</a></li>
-									<li class="menu__item"><a href="#topics" class="menu__link" data-goto="#topics" data-goto-top="100">Тематика</a></li>
-									<li class="menu__item"><a href="#school" class="menu__link" data-goto="#school" data-goto-top="100">Школа</a></li>
-									<li class="menu__item"><a href="#dates" class="menu__link" data-goto="#dates" data-goto-top="100">Даты</a></li>
-									<li class="menu__item"><a href="#participants" class="menu__link" data-goto="#participants" data-goto-top="100">Участникам</a></li>
-									<li class="menu__item"><a href="#contacts" class="menu__link" data-goto="#contacts" data-goto-top="100">Контакты</a></li>
+									<li class="menu__item"><a href="#about" class="menu__link" data-goto="#about"
+											data-goto-top="100" data-translate="About">О ФРЭМЭ</a></li>
+									<li class="menu__item"><a href="#committees" class="menu__link"
+											data-goto="#committees" data-goto-top="100"
+											data-translate="Committees">Комитет</a></li>
+									<li class="menu__item"><a href="#topics" class="menu__link" data-goto="#topics"
+											data-goto-top="100" data-translate="Topics">Тематика</a></li>
+									<li class="menu__item"><a href="#school" class="menu__link" data-goto="#school"
+											data-goto-top="100" data-translate="School">Школа</a></li>
+									<li class="menu__item"><a href="#dates" class="menu__link" data-goto="#dates"
+											data-goto-top="100" data-translate="Dates">Даты</a></li>
+									<li class="menu__item"><a href="#participants" class="menu__link"
+											data-goto="#participants" data-goto-top="100"
+											data-translate="Participants">Участникам</a></li>
+									<li class="menu__item"><a href="#contacts" class="menu__link" data-goto="#contacts"
+											data-goto-top="100" data-translate="Contacts">Контакты</a></li>
 								</ul>
 							</nav>
 						</div>
-						<a href="registration.html" class="button header__button">Принять участие</a>
+						<a href="registration.html" class="button header__button" data-translate="Participate">Принять
+							участие</a>
 						<button type="button" class="menu__icon icon-menu"><span></span></button>
 					</div>
 				</div>
 			</div>
 		</header>
-		<main class="page" id="page" data-fullscreen>
+		<main class="page" id="page">
 			<div class="page__wrapper">
 				<div class="page__container __container">
 					<div class="page__body " data-fullscreen>
-						<h1 class="page__title">ФРЭМЭ`2022</h1>
-						<p class="page__subtitle">XV Международная Научная Конференция "Физика и Радиоэлектроника в
-							Медицине и Экологии"</p>
+						<h1 class="page__title" data-translate="PhRЕME">ФРЭМЭ`2022</h1>
+						<p class="page__subtitle" data-translate="pageSubtitle">XV Международная Научная Конференция
+							«Физика и Радиоэлектроника в
+							Медицине и Экологии»</p>
 						<div class="page__description">
-							<time class="page__date datelol" datetime="2022-06-28">28 - 30 июня 2022</time>
-							<p class="page__location">Владимир - Суздаль</p>
+							<time class="page__date datelol" datetime="2022-06-28" data-translate="pageDate">28 - 30
+								июня 2022</time>
+							<p class="page__location" data-translate="pageLocation">Владимир - Суздаль</p>
 						</div>
 						<div class="page__buttons btn">
-							<a href="#about" class="btn__about" data-goto="#about" data-goto-top="100">О ФРЭМЭ</a>
-							<a href="#topics" class="btn__topics" data-goto="#topics" data-goto-top="100">Тематика</a>
+							<a href="#about" class="btn__about" data-goto="#about" data-goto-top="100"
+								data-translate="About">О ФРЭМЭ</a>
+							<a href="#topics" class="btn__topics" data-goto="#topics" data-goto-top="100"
+								data-translate="Topics">Тематика</a>
 						</div>
 					</div>
+				</div>
+			</div>
 		</main>
 		<section class="about" id="about">
 			<div class="about__wrapper">
 				<div class="about__container __container">
-					<h2 class="title">О фрэмэ</h2>
+					<h2 class="title" data-translate="About">О фрэмэ</h2>
 					<div class="about__body">
 						<svg class="about__model model" viewBox="-20 -20 40 40">
 							<circle class="model__orbit" cx="0.0" cy="0.0" r="8.0" stroke="#CFCFCF" fill="none" />
@@ -87,7 +185,8 @@
 							<circle class="model__electron model__electron_7" cx="8.0" cy="0.0" r="1.3" />
 							<circle class="model__atom" cx="0.0" cy="0.0" r="4.0" fill="#00B13F" />
 						</svg>
-						<p class="about__description">Первая конференция "Физика и Радиоэлектроника в Медицине и
+						<p class="about__description" data-translate="aboutDescription">Первая конференция "Физика и
+							Радиоэлектроника в Медицине и
 							Экологии" прошла в далёком
 							1994 году.С тех пор силами Владимирского Государственного Университета и кафедры
 							Электроники,приборостроения и биотехнических систем(ЭПБС) - ранее
@@ -99,28 +198,30 @@
 							конференции стал 2016 год.12-я конференция ФРЭМЭ в 2016 году впервые проводилась
 							совместно с 12-й Российско-германской конференцией по биомедицинской инженерии (RGC BME
 							2016).
-
 						</p>
 					</div>
-					<a href="history.html" class="about__detailed">Подробнее</a>
+					<a href="history.html" class="about__detailed" data-translate="aboutDetailed">Подробнее</a>
 				</div>
 			</div>
 		</section>
 		<section class="committees" id="committees">
 			<div class="committees__wrapper">
 				<div class="committees__container __container">
-					<h2 class="title">Международный Программный Комитет</h2>
+					<h2 class="title" data-translate="committeesTitle">Международный Программный Комитет</h2>
 					<div class="committees__header cards-committees">
 						<article class="card-committees">
 							<div class="card-committees__header">
-								<h3 class="card-committees__subtitle">Председатель</h3>
+								<h3 class="card-committees__subtitle" data-translate="committeesChairman">Председатель
+								</h3>
 								<figure class="card-committees__figure">
-									<picture><source srcset="img/image-11.webp" type="image/webp"><img src="img/image-11.jpg" alt="" class="card-committees__image"></picture>
+									<picture>
+										<source srcset="img/image-11.webp" type="image/webp"><img src="img/image-11.jpg"
+											alt="" class="card-committees__image"></picture>
 								</figure>
 							</div>
 							<div class="card-committees__body">
-								<h2 class="card-committees__title">Гуляев Ю.В.</h2>
-								<p class="card-committees__copy">
+								<h4 class="card-committees__title" data-translate="GulyaevTitle">Гуляев Ю.В.</h4>
+								<p class="card-committees__copy" data-translate="GulyaevDescription">
 									д.ф-м.н.,профессор, академик РАН, научный руководитель Института радиотехники и
 									электроники имени В.А. Котельникова РАН, г. Москва
 								</p>
@@ -128,28 +229,34 @@
 						</article>
 						<article class="card-committees">
 							<div class="card-committees__header">
-								<h3 class="card-committees__subtitle">Сопредседатель</h3>
+								<h3 class="card-committees__subtitle" data-translate="committeesCochair">Сопредседатель
+								</h3>
 								<figure class="card-committees__figure">
-									<picture><source srcset="img/image-12.webp" type="image/webp"><img src="img/image-12.jpg" alt="" class="card-committees__image"></picture>
+									<picture>
+										<source srcset="img/image-12.webp" type="image/webp"><img src="img/image-12.jpg"
+											alt="" class="card-committees__image"></picture>
 								</figure>
 							</div>
 							<div class="card-committees__body">
-								<h2 class="card-committees__title">Осипов А.А.</h2>
-								<p class="card-committees__copy">
+								<h4 class="card-committees__title" data-translate="OsipovTitle">Осипов А.А.</h4>
+								<p class="card-committees__copy" data-translate="OsipovDescription">
 									к.м.н.,и.о. директора Департамента здравоохранения Владимирской области.
 								</p>
 							</div>
 						</article>
 						<article class="card-committees">
 							<div class="card-committees__header">
-								<h3 class="card-committees__subtitle">Зам.председателя</h3>
+								<h3 class="card-committees__subtitle" data-translate="committeesDeputyChairman">
+									Зам.председателя</h3>
 								<figure class="card-committees__figure">
-									<picture><source srcset="img/image-13.webp" type="image/webp"><img src="img/image-13.jpg" alt="" class="card-committees__image"></picture>
+									<picture>
+										<source srcset="img/image-13.webp" type="image/webp"><img src="img/image-13.jpg"
+											alt="" class="card-committees__image"></picture>
 								</figure>
 							</div>
 							<div class="card-committees__body">
-								<h2 class="card-committees__title">Сушкова Л.Т.</h2>
-								<p class="card-committees__copy">
+								<h4 class="card-committees__title" data-translate="SushkovaTitle">Сушкова Л.Т.</h4>
+								<p class="card-committees__copy" data-translate="SushkovaDescription">
 									д.т.н., профессор кафедры биомедицинских и электронных средств и технологий, г.
 									Владимир
 								</p>
@@ -157,79 +264,93 @@
 						</article>
 					</div>
 					<div class="committees__slider swiper">
+						<h3 class="subtitle swiper__title" data-translate="committeesOther">Остальные члены комитета
+						</h3>
 						<div class="swiper-wrapper">
 							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Eskofier B.</h3>
-								<p class="swiper-slide__description">профессор отделения компьютерных наук технического
-									факультета, руководитель лаборатории «Машинное обучение и анализ данных»
-									Фридрих-Александра Университета Эрланген-Нюрнберг, Германия;
+								<h4 class="swiper-slide__title" data-translate="CherepeninTitle">Черепенин В.А.</h4>
+								<p class="swiper-slide__description" data-translate="CherepeninDescription">чл.-корр.
+									РАН, зав. лабораторией математических
+									методов радиофизики Института радиотехники и электроники имени В.А. Котельникова
+									РАН, г. Москва;
 								</p>
 							</div>
 							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Зайченко К.В.</h3>
-								<p class="swiper-slide__description">д.т.н., профессор, Заведующий лабораторией радио- и
+								<h4 class="swiper-slide__title" data-translate="LupyanTitle">Лупян Е.А.</h4>
+								<p class="swiper-slide__description" data-translate="LupyanDescription">зам. директора
+									ИКИ РАН, г. Москва;</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="YuldashevTitle">Юлдашев З.М.</h4>
+								<p class="swiper-slide__description" data-translate="YuldashevDescription">зав. каф.
+									биотехнических систем, НИУ «СПбГЭТУ»
+									(ЛЭТИ), д.т.н., проф., г. Санкт-Петербург;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="RozanovTitle">Розанов В.В.</h4>
+								<p class="swiper-slide__description" data-translate="RozanovDescription">профессор
+									кафедры физики ускорителей и радиационной
+									медицины, МГУ, д.б.н., к.ф-м.н., г. Москва;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="SeverinTitle">Северин А.Е.</h4>
+								<p class="swiper-slide__description" data-translate="SeverinDescription">профессор
+									кафедры нормальной физиологии, РУДН,
+									д.м.н., г. Москва;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="NiemannTitle">Ниманн Х.</h4>
+								<p class="swiper-slide__description" data-translate="NiemannDescription">почётный
+									профессор ВлГУ, г. Эрланген, Германия,
+									д.т.н., профессор;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="SamorodovTitle">Самородов А.В.</h4>
+								<p class="swiper-slide__description" data-translate="SamorodovDescription">зав. каф.
+									«Биомедицинские технические системы»
+									(БМТ) Московского государственного технического университета им. Н.Э.Баумана,
+									к.т.н., доцент;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="EmelianenkoTitle">Емельяненко В.М.</h4>
+								<p class="swiper-slide__description" data-translate="EmelianenkoDescription">доктор
+									медицинских наук, профессор, Заслуженный
+									врач РФ, научный руководитель ООО "Первый клинический медицинский центр" </p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="IlyinTitle">Ильин А. И.</h4>
+								<p class="swiper-slide__description" data-translate="IlyinDescription">заведующий
+									центром медицинской профилактики ГБУЗ ВО
+									«Областной центр лечебной физкультуры и спортивной медицины»,г. Владимир, к.м.н.;
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="MagrupovTitle">Магрупов Т. М.</h4>
+								<p class="swiper-slide__description" data-translate="MagrupovDescription">д.т.н.,
+									профессор, профессор кафедры Биомедицинской
+									инженерии Ташкентского государственного технического университета им.Ислама Каримова
+								</p>
+							</div>
+							<div class="committees__slide swiper-slide">
+								<h4 class="swiper-slide__title" data-translate="ZaichenkoTitle">Зайченко К.В.</h4>
+								<p class="swiper-slide__description" data-translate="ZaichenkoDescription">д.т.н.,
+									профессор, Заведующий лабораторией радио- и
 									оптоэлектронных приборов для биоинформационных и геномных технологий ранней
 									диагностики патологий живых систем, Институт аналитического приборостроения РАН,
 									Санкт-Петербург;
 								</p>
 							</div>
 							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Черепенин В.А.</h3>
-								<p class="swiper-slide__description">чл.-корр. РАН, зав. лабораторией математических
-									методов радиофизики Института радиотехники и электроники имени В.А. Котельникова
-									РАН, г. Москва;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Лупян Е.А.</h3>
-								<p class="swiper-slide__description">зам. директора ИКИ РАН, г. Москва;</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Юлдашев З.М.</h3>
-								<p class="swiper-slide__description">зав. каф. биотехнических систем, НИУ «СПбГЭТУ»
-									(ЛЭТИ), д.т.н., проф., г. Санкт-Петербург;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Розанов В.В.</h3>
-								<p class="swiper-slide__description">профессор кафедры физики ускорителей и радиационной
-									медицины, МГУ, д.б.н., к.ф-м.н., г. Москва;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Северин А.Е.</h3>
-								<p class="swiper-slide__description">профессор кафедры нормальной физиологии, РУДН,
-									д.м.н., г. Москва;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Ниманн Х.</h3>
-								<p class="swiper-slide__description">почётный профессор ВлГУ, г. Эрланген, Германия,
-									д.т.н., профессор;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Самородов А.В.</h3>
-								<p class="swiper-slide__description">зав. каф. «Биомедицинские технические системы»
-									(БМТ) Московского государственного технического университета им. Н.Э.Баумана,
-									к.т.н., доцент;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Емельяненко В.М.</h3>
-								<p class="swiper-slide__description">доктор медицинских наук, профессор, Заслуженный
-									врач РФ, научный руководитель ООО "Первый клинический медицинский центр" </p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Ильин А. И.</h3>
-								<p class="swiper-slide__description">заведующий центром медицинской профилактики ГБУЗ ВО
-									«Областной центр лечебной физкультуры и спортивной медицины»,г. Владимир, к.м.н.;
-								</p>
-							</div>
-							<div class="committees__slide swiper-slide">
-								<h3 class="swiper-slide__title">Магрупов Т. М.</h3>
-								<p class="swiper-slide__description">д.т.н., профессор, профессор кафедры Биомедицинской
-									инженерии Ташкентского государственного технического университета им.Ислама Каримова
+								<h4 class="swiper-slide__title" data-translate="EskofierTitle">Eskofier B.</h4>
+								<p class="swiper-slide__description" data-translate="EskofierDescription">профессор
+									отделения компьютерных наук технического
+									факультета, руководитель лаборатории «Машинное обучение и анализ данных»
+									Фридрих-Александра Университета Эрланген-Нюрнберг, Германия;
 								</p>
 							</div>
 						</div>
@@ -242,92 +363,116 @@
 		<section class="topics" id="topics">
 			<div class="topics__wrapper">
 				<div class="topics__container __container">
-					<h2 class="title">Тематика</h2>
+					<h2 class="title" data-translate="Topics">Тематика</h2>
 					<div class="topics__cards">
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">1. Методы и средства диагностики и лечения заболеваний
-								</h2>
+								<h3 class="card-topic__title" data-translate="Topics1">1. Методы и средства диагностики
+									и лечения заболеваний
+								</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image2.webp" type="image/webp"><img src="img/image2.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image2.webp" type="image/webp"><img src="img/image2.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">2. Биокибернетика и математическое моделирование</h2>
+								<h3 class="card-topic__title" data-translate="Topics2">2. Биокибернетика и
+									математическое моделирование</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image3.webp" type="image/webp"><img src="img/image3.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image3.webp" type="image/webp"><img src="img/image3.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">3. Биомеханика, проблемы коррекции и лечения
-									опорно-двигательного аппарата</h2>
+								<h3 class="card-topic__title" data-translate="Topics3">3. Биомеханика, проблемы
+									коррекции и лечения
+									опорно-двигательного аппарата</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image4.webp" type="image/webp"><img src="img/image4.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image4.webp" type="image/webp"><img src="img/image4.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">4. Инфокоммуникаци-<br>онные технологии в медицине и
-									экологии</h2>
+								<h3 class="card-topic__title" data-translate="Topics4">4. Инфокоммуникаци-<br>онные
+									технологии в медицине и
+									экологии</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image5.webp" type="image/webp"><img src="img/image5.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image5.webp" type="image/webp"><img src="img/image5.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">5. Интеллектуальные биометрические системы и технологии
-									(научная молодежная школа)</h2>
+								<h3 class="card-topic__title" data-translate="Topics5">5. Интеллектуальные
+									биометрические системы и технологии
+									(научная молодежная школа)</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image6.webp" type="image/webp"><img src="img/image6.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image6.webp" type="image/webp"><img src="img/image6.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">6. Биотехнические и медицинские аппараты, системы,
+								<h3 class="card-topic__title" data-translate="Topics6">6. Биотехнические и медицинские
+									аппараты, системы,
 									комплексы
-								</h2>
+								</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">7. Методы и средства диагностики природной среды</h2>
+								<h3 class="card-topic__title" data-translate="Topics7">7. Методы и средства диагностики
+									природной среды</h3>
 							</div>
 						</article>
 						<article class="topics__card card-topic">
 							<div class="card-topic__header">
 								<figure class="card-topic__figure">
-									<picture><source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png" alt="" class="card-topic__image"></picture>
+									<picture>
+										<source srcset="img/image1.webp" type="image/webp"><img src="img/image1.png"
+											alt="" class="card-topic__image"></picture>
 								</figure>
 							</div>
 							<div class="card-topic__body">
-								<h2 class="card-topic__title">8. Экология и здоровье человека</h2>
+								<h3 class="card-topic__title" data-translate="Topics8">8. Экология и здоровье человека
+								</h3>
 							</div>
 						</article>
 					</div>
@@ -337,14 +482,17 @@
 		<section class="school" id="school">
 			<div class="school__wrapper">
 				<div class="school__container __container">
-					<h2 class="title">Научная молодежная школа</h2>
-					<h3 class="subtitle">“Интеллектуальные биометрические системы и технологии” имени И.Н.Спиридонова.
-					</h3>
+					<h2 class="title" data-translate="schoolTitle">Научная молодежная школа</h2>
+					<p class="subtitle" data-translate="schoolSubtitle">“Интеллектуальные биометрические системы и
+						технологии” имени И.Н.Спиридонова.
+					</p>
 					<div class="school__body">
 						<div class="school__information">
-							<h4 class="school__title">Даты проведения</h4>
-							<time class="school__date" datetime="2022-06-28">28 - 30 июня 2022</time>
-							<p class="school__description">К участию в научной молодёжной сессии приглашаются молодые
+							<h3 class="school__title" data-translate="schoolDateTitle">Даты проведения</h3>
+							<time class="school__date" datetime="2022-06-28" data-translate="schoolDate">28 - 30 июня
+								2022</time>
+							<p class="school__description" data-translate="schoolDescription">К участию в научной
+								молодёжной сессии приглашаются молодые
 								научные сотрудники, аспиранты и студенты старших курсов научных и образовательных
 								учреждений, работающие по тематикам, связанным с такими направлениями исследований как
 								биометрия, биомедицинская инженерия, биотехнические системы, цифровая обработка сигналов
@@ -354,15 +502,14 @@
 					</div>
 					<div class="school__footer footer-school">
 						<div class="footer-school__item">
-							<h5 class="footer-school__title">Ознакомиться с программой школы</h5>
-							<a href="#" class="footer-school__btn">Открыть</a>
-						</div>
-						<div class="footer-school__item">
-							<h5 class="footer-school__title">Список докладов участников</h5>
-							<a href="#" class="footer-school__btn">Открыть</a>
+							<h3 class="footer-school__title" data-translate="schoolTitleBtn">Ознакомиться с программой
+								школы и списком докладов
+								участников</h3>
+							<a href="doc/FREME2022_prog_ot_21.06.2022_final.pdf" class="footer-school__btn"
+								data-translate="schoolBtn">Открыть</a>
 						</div>
 					</div>
-					<p class="school__text">
+					<p class="school__text" data-translate="schoolText">
 						Проведение молодежной школы предусматривает заслушивание и обсуждение докладов по результатам
 						научно-исследовательских работ молодых ученых, аспирантов и студентов, представленных в виде
 						презентаций. Предусмотрены пленарные обзорные и специализированные доклады ведущих ученых в
@@ -377,107 +524,214 @@
 		<section class="dates" id="dates">
 			<div class="dates__wrapper">
 				<div class="dates__container __container">
-					<h2 class="title">Ключевые даты</h2>
-					<div class="dates__body body-dates">
-						<div class="body-dates__item __active">
-							<h3 class="body-dates__title">Срок предоставления оформленных материалов</h3>
-							<time class="body-dates__date" datetime="2022-04-25">до 20 мая 2022</time>
-						</div>
-						<div class="body-dates__item">
-							<h3 class="body-dates__title">Рассылка программы конференции</h3>
-							<time class="body-dates__date" datetime="2022-06-10"> до 10 июня 2022</time>
-						</div>
-						<div class="body-dates__item">
-							<h3 class="body-dates__title">Начало заезда участников конференции</h3>
-							<time class="body-dates__date" datetime="2022-06-28">27 июня 2022</time>
-						</div>
-						<div class="body-dates__item">
-							<h3 class="body-dates__title">Регистрация участников</h3>
-							<time class="body-dates__date" datetime="2022-06-28">28 июня 2022</time>
-						</div>
-						<div class="body-dates__item">
-							<h3 class="body-dates__title">Начало работы конференции</h3>
-							<time class="body-dates__date" datetime="2022-06-29">28 июня 2022</time>
-						</div>
-						<div class="body-dates__item">
-							<h3 class="body-dates__title">Окончание работы конференци</h3>
-							<time class="body-dates__date" datetime="2022-06-30">30 июня 2022</time>
-						</div>
-					</div>
+					<h2 class="title" data-translate="datesTitle">Ключевые даты</h2>
+					<ul class="dates__body body-dates">
+						<li class="date">
+							<time datetime="2022-05-20" class="date__title" data-translate="eventData1">до 10 июня
+								2022</time>
+						</li>
+						<li class="events">
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-text" data-translate="eventText1">Предоставления оформленных
+										материалов и рассылка программы конференции</span>
+								</li>
+							</ul>
+						</li>
+						<li class="date">
+							<time datetime="2022-06-27" class="date__title" data-translate="eventData2">27 июня
+								2022</time>
+							<p class="date__description" data-translate="eventCity">г.Суздаль</p>
+						</li>
+						<li class="events">
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-text" data-translate="eventText2">Заезд участников
+										конференции</span>
+								</li>
+							</ul>
+						</li>
+						<li class="date">
+							<time datetime="2022-06-28" class="date__title" data-translate="eventData3">28 июня
+								2022</time>
+							<p class="date__description">г.Суздаль</p>
+						</li>
+						<li class="events">
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">8:30 - 9:30 </span>
+									<span class="event-name" data-translate="eventRegist">Регистрация участников
+										конференции</span>
+									<span class="event-location" data-translate="eventLocation1">Место проведение:
+										Вестибюль ГТК</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">9:30 - 13:00 </span>
+									<span class="event-name" data-translate="eventMeeting">Пленарное
+										заседание</span><span> I</span>
+									<span class="event-location" data-translate="eventHallC">Место проведение: Зал
+										"С"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">13:00 - 14:00 </span>
+									<span class="event-name" data-translate="eventLunch">Перерыв на обед</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">14:00 - 16:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 7</span>
+									<span class="event-location" data-translate="eventHallA">Место проведение: Зал
+										"A"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">14:00 - 16:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span>
+										5</span><span data-translate="eventSchool">(Научная молодежная школа)</span>
+									<span class="event-location" data-translate="eventHallB">Место проведение: Зал
+										"B"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">16:00 - 16:15 </span>
+									<span class="event-name" data-translate="eventCoffe">Кофе-брейк</span>
+									<span class="event-location" data-translate="eventLocation1">Место проведение:
+										Вестибюль ГТК</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">16:15 - 18:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 3</span>
+									<span class="event-location" data-translate="eventHallA">Место проведение: Зал
+										"A"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">16:15 - 18:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 4</span>
+									<span class="event-location" data-translate="eventHallB">Место проведение: Зал
+										"В"</span>
+								</li>
+							</ul>
+						</li>
+						<li class="date">
+							<time datetime="2022-06-28" class="date__title" data-translate="eventData4">29 июня
+								2022</time>
+							<p class="date__description" data-translate="eventCity">г.Суздаль</p>
+						</li>
+						<li class="events">
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">9:00 - 11:00</span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 6</span>
+									<span class="event-location" data-translate="eventHallA">Место проведение: Зал
+										"А"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">9:00 - 11:00</span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 1</span>
+									<span class="event-location" data-translate="eventHallB">Место проведение: Зал
+										"В"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">10:50 - 11:15</span>
+									<span class="event-name" data-translate="eventCoffe">Кофе-брейк</span>
+									<span class="event-location" data-translate="eventLocation1">Место проведение:
+										Вестибюль ГТК</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">11:15 - 13:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 2</span>
+									<span class="event-location" data-translate="eventHallA">Место проведение: Зал
+										"А"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">11:15 - 13:00 </span>
+									<span class="event-name" data-translate="eventSection">Секция</span><span> 8</span>
+									<span class="event-location" data-translate="eventHallB">Место проведение: Зал
+										"В"</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item events-item_bg">
+									<span class="event-time">13:30 - 14:30 </span>
+									<span class="event-name" data-translate="eventLunch">Перерыв на обед</span>
+								</li>
+							</ul>
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-time">13:30 - 14:30 </span>
+									<span class="event-name" data-translate="eventMeeting">Пленарное
+										заседание</span><span> II</span>
+									<span class="event-location" data-translate="eventHallD">Место проведение: Зал
+										"D"</span>
+								</li>
+							</ul>
+						</li>
+						<li class="date">
+							<time datetime="2022-06-28" class="date__title" data-translate="eventData5">30 июня
+								2022</time>
+							<p class="date__description" data-translate="eventCity">г.Суздаль</p>
+						</li>
+						<li class="events">
+							<ul class="events-detail">
+								<li class="events-item">
+									<span class="event-text" data-translate="eventCultural">Культурная программа</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>
 		<section class="participants" id="participants">
 			<div class="participants__wrapper">
 				<div class="participants__container __container">
-					<h2 class="title">Участникам</h2>
+					<h2 class="title" data-translate="Participants">Участникам</h2>
 					<div class="participants__body">
-						<p class="participants__text">Для участие в конференции необходимо оформить статью в
-							соответствии с шаблоном<a class="participants__link" href="doc/shablon_stati_freme.docx" download>(скачать шаблон)</a>.</p>
-						<p class="participants__text">Каждая статья проходит 2 этапа проверки: <br>
+						<p class="participants__text"> <span data-translate="participantsText1">Для участие в
+								конференции необходимо оформить статью в
+								соответствии с шаблоном. </span><a class="participants__link"
+								href="doc/shablon_stati_freme.docx" download
+								data-translate="downloadTemplate">Cкачать&nbsp;шаблон&nbsp;</a></p>
+						<p class="participants__text" data-translate="participantsText2">Каждая статья проходит 2 этапа
+							проверки: <br>
 							&bull;&nbsp;проверка формальных критериев (тематика, проверка форматирования и наличия
 							необходимых данных, требуемый уровень оригинальности 75%);<br>
 							&bull;&nbsp;экспресс-рецензирование.</p>
 						<p class="participants__text">Если материалы статьи не проходят проверку формальных критериев,
 							то они отправляются ответственному автору на доработку.</p>
-						<div data-spollers class="spollers">
-							<div class="spollers__item">
-								<button type="button" data-spoller class="spollers__title">Регистрация
-									участников</button>
-								<div class="spollers__body">
-									<p class="participants__text">Уважаемые участники конференции!</p>
-									<p class="popup__text">Ведётся доработка системы автоматической регистрации
-										участников. Возможны технические неполадки. В качестве временной меры предлагаем
-										вам самим отправить заявку на электронную почту конференции. Вся информация находится ниже.</p>
-									<p class="participants__info">
-										Для участия в конференции необходимо на электронную почту <a href="mailto:FREME.2022@mail.ru"><b>FREME.2022@mail.ru</b></a> направить 6
-										файлов:<br>
-										&bull;&nbsp;статья (до 4 стр.) на русском языке или английском языке<a class="participants__link" href="doc/shablon_stati_freme.docx" download>(скачать шаблон)</a><br>
-										&bull;&nbsp;файл с названием статьи и аннотациями на русском и английском
-										языках;<br>
-										&bull;&nbsp;акт экспертизы или другой разрешающий документ (сканкопия);<br>
-										&bull;&nbsp;сканкопию документа об оплате «Оргвзноса»*;<br>
-										&bull;&nbsp;файл формы-заявки.<a class="participants__link" href="doc/forma_uchastnika_konferentsii_freme.doc" download>(скачать форму
-											заявки)</a><br>
-										&bull;&nbsp;согласие на обработку персональных данных.<a class="participants__link" href="doc/soglasie_na_obrabodky_pd.docx" download>(скачать форму
-											заявки)</a><br>
-										<br>
-									</p>
-									<p class="spollers__text"><b>*Реквизиты для оплаты оргвзноса:</b>
-										Р/с № 40703810910020100121 во Владимирском ОСБ №8611 РФ г. Владимира, БИК
-										041708602, к/с 30101810000000000602, получатель платежа – Владимирская
-										региональная общественная организация РНТО РЭС им. А.С.Попова, ИНН
-										3327702155/КПП 332701001, с пометкой «Оргвзнос за участие в конференции
-										ФРЭМЭ’2022».
-										<br>
-									<table class="iksweb">
-										<tbody>
-											<tr>
-												<td>Для участников конференции</td>
-												<td>1000 рублей</td>
-											</tr>
-											<tr>
-												<td>Для молодых ученых(до 33 лет) и апирантов(при предоставления
-													удостоерения)</td>
-												<td>800 рублей</td>
-											</tr>
-											<tr>
-												<td>Заочное участие</td>
-												<td>500 рублей</td>
-											</tr>
-											<tr>
-												<td>Для иностранных участников</td>
-												<td>100 евро</td>
-											</tr>
-										</tbody>
-									</table>
-									</p>
-								</div>
+						<div class="program">
+							<div class="program__item">
+								<h3 class="program__title" data-translate="programTitle">Программа конференции</h3>
+								<p class="program__text" data-translate="programText">Ознакомиться с полной программой
+									конференции, расписанием
+									секций и списком докладчиком</p>
+								<a class="program__btn" href="doc/FREME2022_prog_ot_21.06.2022_final.pdf"
+									data-translate="programBtn">Ознакомиться</a>
 							</div>
 						</div>
 						<div data-spollers class="spollers">
 							<div class="spollers__item">
-								<button type="button" data-spoller class="spollers__title">Сборники трудов</button>
+								<button type="button" data-spoller class="spollers__title"
+									data-translate="participantsBtn">Сборники трудов</button>
 								<div class="spollers__body">
 									<ul class="works-list">
 										<li class="works-list__item">
@@ -485,7 +739,10 @@
 											<div class="works-list__info">Сборник трудов 14-й Международной
 												научно-технической конференции «Физика и радиоэлектроника в медицине и
 												экологии» (2020)
-												<span>Скачать:<a href="doc/works/1 Chast FREME2020.pdf" class="works-list__link">Книга 1</a><a href="doc/works/2 Chast FREME2020.pdf" class="works-list__link">Книга 2</a></span>
+												<span>Скачать:<a href="doc/works/1_Chast_FREME2020.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/2_Chast_FREME2020.pdf"
+														class="works-list__link">Книга 2</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
@@ -493,7 +750,10 @@
 											<div class="works-list__info">Сборник трудов 13-й Международной
 												научно-технической конференции «Физика и радиоэлектроника в медицине и
 												экологии» (2018)
-												<span>Скачать:<a href="doc/works/freme_2018_book_1.pdf" class="works-list__link">Книга 1</a><a href="doc/works/freme_2018_book_2.pdf" class="works-list__link">Книга 2</a></span>
+												<span>Скачать:<a href="doc/works/freme_2018_book_1.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/freme_2018_book_2.pdf"
+														class="works-list__link">Книга 2</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
@@ -501,14 +761,18 @@
 											<div class="works-list__info">Сборник трудов 12-й Международной
 												научно-технической конференции «Физика и радиоэлектроника в медицине и
 												экологии» (2016)
-												<span>Скачать:<a href="doc/works/freme_2016_book_1.pdf" class="works-list__link">Книга 1</a><a href="doc/works/freme_2016_book_2.pdf" class="works-list__link">Книга 2</a></span>
+												<span>Скачать:<a href="doc/works/freme_2016_book_1.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/freme_2016_book_2.pdf"
+														class="works-list__link">Книга 2</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
 											<div class="works-list__icon"></div>
 											<div class="works-list__info">Сборник трудов 12-й Российско-германской
 												конференции по биомедицинской инженерии RGC BME'2016
-												<span>Скачать:<a href="doc/works/RGC-2016-Proceedings.pdf" class="works-list__link">Книга 1</a></span>
+												<span>Скачать:<a href="doc/works/RGC-2016-Proceedings.pdf"
+														class="works-list__link">Книга 1</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
@@ -516,7 +780,10 @@
 											<div class="works-list__info">Сборник трудов 11-й Международной
 												научно-технической конференции «Физика и радиоэлектроника в медицине и
 												экологии» (2014)
-												<span>Скачать:<a href="doc/works/freme_2014_book_1.pdf" class="works-list__link">Книга 1</a><a href="doc/works/freme_2014_book_2.pdf" class="works-list__link">Книга 2</a></span>
+												<span>Скачать:<a href="doc/works/freme_2014_book_1.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/freme_2014_book_2.pdf"
+														class="works-list__link">Книга 2</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
@@ -524,7 +791,12 @@
 											<div class="works-list__info">Сборник трудов 10-й Международной
 												научно-технической конференции «Физика и радиоэлектроника в медицине и
 												экологии» (2012)
-												<span>Скачать:<a href="doc/works/freme_2012_book_1.pdf" class="works-list__link">Книга 1</a><a href="doc/works/freme_2012_book_2.pdf" class="works-list__link">Книга 2</a><a href="doc/works/freme_2012_book_3.pdf" class="works-list__link">Книга 3</a></span>
+												<span>Скачать:<a href="doc/works/freme_2012_book_1.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/freme_2012_book_2.pdf"
+														class="works-list__link">Книга 2</a><a
+														href="doc/works/freme_2012_book_3.pdf"
+														class="works-list__link">Книга 3</a></span>
 											</div>
 										</li>
 										<li class="works-list__item">
@@ -533,7 +805,10 @@
 												Сборник трудов 8-й Международной научно-технической конференции «Физика
 												и радиоэлектроника в медицине и экологии» c научной молодежной школой
 												имени И.Н. Спиридонова (2008)
-												<span>Скачать:<a href="doc/works/freme_2008_book_1.pdf" class="works-list__link">Книга 1</a><a href="doc/works/freme_2008_book_2.pdf" class="works-list__link">Книга 2</a></span>
+												<span>Скачать:<a href="doc/works/freme_2008_book_1.pdf"
+														class="works-list__link">Книга 1</a><a
+														href="doc/works/freme_2008_book_2.pdf"
+														class="works-list__link">Книга 2</a></span>
 											</div>
 										</li>
 									</ul>
@@ -547,15 +822,31 @@
 		<section class="support">
 			<div class="support__wrapper">
 				<div class="support__container __container">
-					<h2 class="title">Информационная поддержка</h2>
-					<p class="support__description">Информационная поддержка обеспечивается журналами: «Медицинская
+					<h2 class="title" data-translate="support">Информационная поддержка</h2>
+					<p class="support__description" data-translate="supportDescription">Информационная поддержка
+						обеспечивается журналами: «Медицинская
 						техника», «Биомедицинская радиоэлектроника», «Технологии живых систем», «Биотехносфера»</p>
 					<div class="support__body">
-						<div class="support__item"><picture><source srcset="img/journal-1.webp" type="image/webp"><img src="img/journal-1.png" alt="Медицинская техника"></picture></div>
-						<div class="support__item"><picture><source srcset="img/journal-2.webp" type="image/webp"><img src="img/journal-2.png" alt="Биомедицинская радиоэлектроника"></picture>
+						<div class="support__item">
+							<picture>
+								<source srcset="img/journal-1.webp" type="image/webp"><img src="img/journal-1.png"
+									alt="Медицинская техника"></picture>
 						</div>
-						<div class="support__item"><picture><source srcset="img/journal-3.webp" type="image/webp"><img src="img/journal-3.png" alt="Технологии живых систем"></picture></div>
-						<div class="support__item"><picture><source srcset="img/journal-4.webp" type="image/webp"><img src="img/journal-4.png" alt="Биотехносфера"></picture></div>
+						<div class="support__item">
+							<picture>
+								<source srcset="img/journal-2.webp" type="image/webp"><img src="img/journal-2.png"
+									alt="Биомедицинская радиоэлектроника"></picture>
+						</div>
+						<div class="support__item">
+							<picture>
+								<source srcset="img/journal-3.webp" type="image/webp"><img src="img/journal-3.png"
+									alt="Технологии живых систем"></picture>
+						</div>
+						<div class="support__item">
+							<picture>
+								<source srcset="img/journal-4.webp" type="image/webp"><img src="img/journal-4.png"
+									alt="Биотехносфера"></picture>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -563,16 +854,17 @@
 		<section class="contacts" id="contacts">
 			<div class="contacts__wrapper">
 				<div class="contacts__container __container">
-					<h2 class="title">Контакты</h2>
+					<h2 class="title" data-translate="Contacts">Контакты</h2>
 					<div class="contacts__body">
 						<ul class="contacts__item contacts-list">
 							<li class="contacts-list__item">
-								<h3 class="contacts-list__title">Почтовый адрес</h3>
-								<p class="contacts-list__text">600000, г. Владимир, ул. Горького, 87, ИИТР, каф. ЭПБС
+								<h3 class="contacts-list__title" data-translate="postalAddress">Почтовый адрес</h3>
+								<p class="contacts-list__text">600000, г.&nbsp;Владимир, ул.&nbsp;Горького, 87, ИИТР,
+									каф.&nbsp;ЭПБС
 								</p>
 							</li>
 							<li class="contacts-list__item">
-								<h3 class="contacts-list__title">Телефон</h3>
+								<h3 class="contacts-list__title" data-translate="telephone">Телефон</h3>
 								<p class="contacts-list__text"><a href="tel:+74922479979">(4922) 47-99-79, 47-76-12</a>
 								</p>
 							</li>
@@ -581,17 +873,15 @@
 								<p class="contacts-list__text"><a href="mailto:kafbmi@mail.ru">kafbmi@mail.ru</a></p>
 							</li>
 							<li class="contacts-list__item">
-								<h3 class="contacts-list__title">По всем организационным вопросам обращайтесь
+								<h3 class="contacts-list__title" data-translate="сontactQuestions">По всем орг. вопросам
+									обращайтесь
 									по адресу</h3>
-								<p class="contacts-list__text"><a href="mailto:FREME.2022@mail.ru">FREME.2022@mail.ru</a></p>
-							</li>
-							<li class="contacts-list__item">
-								<h3 class="contacts-list__title">Дополнительную информацию можно получить на кафедре
-									"Электроники приборостроения и биотехнических систем" ВлГУ</h3>
+								<p class="contacts-list__text"><a
+										href="mailto:FREME.2022@mail.ru">FREME.2022@mail.ru</a></p>
 							</li>
 						</ul>
-						<div class="contacts__item contacts-map">
-							<div id="map" style="width: 600px; height: 400px"></div>
+						<div class="contacts__item">
+							<div id="map" class="contacts-map"></div>
 						</div>
 					</div>
 				</div>
@@ -600,44 +890,42 @@
 		<footer class="footer">
 			<div class="footer__container __container">
 				<div class="footer__body">
-					<a href="#" class="footer__logo">ФРЭМЭ`2022</a>
-					<h2 class="footer__title">XV Международная Научная Конференция "Физика и Радиоэлектроника в Медицине
+					<a href="#" class="footer__logo" data-translate="PhRЕME">ФРЭМЭ`2022</a>
+					<h2 class="footer__title" data-translate="pageSubtitle">XV Международная Научная Конференция "Физика
+						и Радиоэлектроника в Медицине
 						и Экологии"</h2>
 					<ul class="footer__list list-footer">
-						<li class="list-footer__item"><a href="#about" class="list-footer__link" data-goto="#about" data-goto-top="100">О ФРЭМЭ</a></li>
-						<li class="list-footer__item"><a href="#committees" class="list-footer__link" data-goto="#committees" data-goto-top="100">Комитеты</a></li>
-						<li class="list-footer__item"><a href="#topics" class="list-footer__link" data-goto="#topics" data-goto-top="100">Тематика</a></li>
-						<li class="list-footer__item"><a href="#committees" class="list-footer__link" data-goto="#committees" data-goto-top="100">Комитеты</a></li>
-						<li class="list-footer__item"><a href="#school" class="list-footer__link" data-goto="#school" data-goto-top="100">Школа</a></li>
-						<li class="list-footer__item"><a href="#dates" class="list-footer__link" data-goto="#dates" data-goto-top="100">Даты</a></li>
-						<li class="list-footer__item"><a href="#participants" class="list-footer__link" data-goto="#participants" data-goto-top="100">Участникам</a></li>
-						<li class="list-footer__item"><a href="#contacts" class="list-footer__link" data-goto="#contacts" data-goto-top="100">Контакты</a></li>
+						<li class="list-footer__item"><a href="#about" class="list-footer__link" data-goto="#about"
+								data-goto-top="100" data-translate="About">О ФРЭМЭ</a></li>
+						<li class="list-footer__item"><a href="#committees" class="list-footer__link"
+								data-goto="#committees" data-goto-top="100" data-translate="Committees">Комитеты</a>
+						</li>
+						<li class="list-footer__item"><a href="#topics" class="list-footer__link" data-goto="#topics"
+								data-goto-top="100" data-translate="Topics">Тематика</a></li>
+						<li class="list-footer__item"><a href="#school" class="list-footer__link" data-goto="#school"
+								data-goto-top="100" data-translate="School">Школа</a></li>
+						<li class="list-footer__item"><a href="#dates" class="list-footer__link" data-goto="#dates"
+								data-goto-top="100" data-translate="Dates">Даты</a></li>
+						<li class="list-footer__item"><a href="#participants" class="list-footer__link"
+								data-goto="#participants" data-goto-top="100"
+								data-translate="Participants">Участникам</a></li>
+						<li class="list-footer__item"><a href="#contacts" class="list-footer__link"
+								data-goto="#contacts" data-goto-top="100" data-translate="Contacts">Контакты</a></li>
 					</ul>
 				</div>
 				<div class="footer__panel">
-					<span class="footer__copyright">&copy; 2022 ФРЭМЭ. Все права защищены.</span>
-					<a href="https://teletype.link/s.konstantin" target="_blank" class="footer__developer">Разработка
+					<span class="footer__copyright" data-translate="copy">&copy; 2022 ФРЭМЭ. Все права защищены.</span>
+					<a href="https://teletype.link/s.konstantin" target="_blank" class="footer__developer"
+						data-translate="development">Разработка
 						сайта - Konstantin.S</a>
 				</div>
 			</div>
 		</footer>
-		<!--<div id="popup" aria-hidden="true" class="popup popup_show">
-	<div class="popup__wrapper">
-		<div class="popup__content">
-			<button data-close type="button" class="popup__close">X</button>
-			<div class="popup__body">
-				<h2 class="popup__title">Уважаемые участники конференции!</h2>
-				<p class="popup__text">Ведётся доработка системы автоматической регистрации участников. Возможны технические неполадки. В качестве временной меры предлагаем вам самим отправить заявку на электронную почту конференции. Вся информация для участников, а также форма регистрации и шаблон для оформления статей можно скачать в разделе <a href="#" data-goto="#participants" data-goto-top="100" data-close>"Участникам"</a>.</p>
-				<a href="#" data-goto="#participants" data-goto-top="100" data-close class="popup__link">Перейти в раздел "Участникам"</a></p>
-			</div>
-		</div>
 	</div>
-</div>
-
--->
-	</div>
-	<script src="https://api-maps.yandex.ru/2.1/?apikey=4f533b5b-214b-4616-b61d-c6786320ba1b&lang=ru_RU&_v=20220430234716" type="text/javascript"></script>
-	<script src="js/app.min.js?_v=20220430234716"></script>
+	<script
+		src="https://api-maps.yandex.ru/2.1/?apikey=4f533b5b-214b-4616-b61d-c6786320ba1b&lang=ru_RU&_v=20221023144845"
+		type="text/javascript"></script>
+	<script src="js/app.min.js?_v=20221023144845"></script>
 </body>
 
 </html>

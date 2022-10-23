@@ -25,15 +25,15 @@ $bookingDate = $_POST['bookingDate'];
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp.mail.ru';  																							// Specify main and backup SMTP servers
+$mail->Host = 'smtp.gmail.com';  																							// Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'freme.info@mail.ru'; // Ваш логин от почты с которой будут отправляться письма
-$mail->Password = 'ZsqUNMYYmrhFTQvjzyzJ'; // Ваш пароль от почты с которой будут отправляться письма
-$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465; // TCP port to connect to / этот порт может отличаться у других провайдеров
+$mail->Username = ''; // Ваш логин от почты с которой будут отправляться письма
+$mail->Password = ''; // Ваш пароль от почты с которой будут отправляться письма
+$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587; // TCP port to connect to / этот порт может отличаться у других провайдеров
 
-$mail->setFrom('freme.info@mail.ru'); // от кого будет уходить письмо?
-$mail->addAddress('freme.2022@mail.ru');     // Кому будет уходить письмо 
+$mail->setFrom(''); // от кого будет уходить письмо?
+$mail->addAddress('');     // Кому будет уходить письмо 
 $mail->addAttachment($_FILES['article']['tmp_name'], $_FILES['article']['name']);
 $mail->addAttachment($_FILES['annotation']['tmp_name'], $_FILES['annotation']['name']); 
 $mail->addAttachment($_FILES['expertise']['tmp_name'], $_FILES['expertise']['name']);
@@ -64,7 +64,7 @@ $mail->Body    = '
 $mail->AltBody = '';
 
 if(!$mail->send()) {
-    header('location: popup.html');
+    header('location: home.html');
     echo 'Error';
 } else {
     header('location: sent.html');

@@ -5,14 +5,92 @@
 	<title>Заявка отправлена</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<!--<style>body{opacity: 0;}</style>-->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220430234716">
+	<style>
+		.loader-wrapper {
+			width: 100vw;
+			height: 100vh;
+			background-color: #fff;
+			position: fixed;
+			z-index: 999;
+			overflow: hidden
+		}
+
+		.loaded .loader-wrapper {
+			visibility: hidden;
+			transform: translateY(-100%);
+			transition: all 0.3s 1s ease-out;
+		}
+
+		.preloader {
+			position: relative;
+			width: 80px;
+			height: 80px;
+			top: 45%;
+			margin: 0 auto;
+		}
+
+		.preloader span {
+			position: absolute;
+			border: 8px solid #00B140;
+			border-top: 8px solid transparent;
+			border-radius: 999px;
+		}
+
+		.preloader span:nth-child(1) {
+			width: 80px;
+			height: 80px;
+			animation: spin-1 2s infinite linear;
+		}
+
+		.preloader span:nth-child(2) {
+			top: 20px;
+			left: 20px;
+			width: 40px;
+			height: 40px;
+			animation: spin-2 1s infinite linear;
+		}
+
+		@keyframes spin-1 {
+			0% {
+				transform: rotate(360deg);
+				opacity: 1;
+			}
+
+			50% {
+				transform: rotate(180deg);
+				opacity: 0.5;
+			}
+
+			100% {
+				transform: rotate(0deg);
+				opacity: 1;
+			}
+		}
+
+		@keyframes spin-2 {
+			0% {
+				transform: rotate(0deg);
+				opacity: 0.5;
+			}
+
+			50% {
+				transform: rotate(180deg);
+				opacity: 1;
+			}
+
+			100% {
+				transform: rotate(360deg);
+				opacity: 0.5;
+			}
+		}
+	</style>
+	<link rel="stylesheet" href="css/style.min.css?_v=20221023144845">
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta name="description" content='XV Международная Научная Конференция "Физика и Радиоэлектроника в
 	Медицине и Экологии"'>
 	<meta name="keywords" content="ФРЭМЭ, ВлГУ, Владимир, Конференция, Медицина, Экология, Радиотехника">
 	<meta name="robots" content="index, nofollow">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, minimal-ui">
 	<meta name="yandex-verification" content="cbf18076454326d7" />
 </head>
 
@@ -37,17 +115,17 @@
 							<div class="header__menu menu">
 								<nav class="menu__body">
 									<ul class="menu__list">
-										<li class="menu__item"><a href="#about" class="menu__link" data-goto="#about" data-goto-top="100">О ФРЭМЭ</a></li>
-										<li class="menu__item"><a href="#committees" class="menu__link" data-goto="#committees" data-goto-top="100">Комитет</a></li>
-										<li class="menu__item"><a href="#topics" class="menu__link" data-goto="#topics" data-goto-top="100">Тематика</a></li>
-										<li class="menu__item"><a href="#school" class="menu__link" data-goto="#school" data-goto-top="100">Школа</a></li>
-										<li class="menu__item"><a href="#dates" class="menu__link" data-goto="#dates" data-goto-top="100">Даты</a></li>
-										<li class="menu__item"><a href="#participants" class="menu__link" data-goto="#participants" data-goto-top="100">Участникам</a></li>
-										<li class="menu__item"><a href="#contacts" class="menu__link" data-goto="#contacts" data-goto-top="100">Контакты</a></li>
+										<li class="menu__item"><a href="#about" class="menu__link" data-goto="#about" data-goto-top="100" data-translate="About">О ФРЭМЭ</a></li>
+										<li class="menu__item"><a href="#committees" class="menu__link" data-goto="#committees" data-goto-top="100" data-translate="Committees">Комитет</a></li>
+										<li class="menu__item"><a href="#topics" class="menu__link" data-goto="#topics" data-goto-top="100" data-translate="Topics">Тематика</a></li>
+										<li class="menu__item"><a href="#school" class="menu__link" data-goto="#school" data-goto-top="100" data-translate="School">Школа</a></li>
+										<li class="menu__item"><a href="#dates" class="menu__link" data-goto="#dates" data-goto-top="100" data-translate="Dates">Даты</a></li>
+										<li class="menu__item"><a href="#participants" class="menu__link" data-goto="#participants" data-goto-top="100" data-translate="Participants">Участникам</a></li>
+										<li class="menu__item"><a href="#contacts" class="menu__link" data-goto="#contacts" data-goto-top="100" data-translate="Contacts">Контакты</a></li>
 									</ul>
 								</nav>
 							</div>
-							<a href="registration.html" class="button header__button">Принять участие</a>
+							<a href="registration.html" class="button header__button" data-translate="Participate">Принять участие</a>
 							<button type="button" class="menu__icon icon-menu"><span></span></button>
 						</div>
 					</div>
@@ -69,26 +147,26 @@
 							Медицине
 							и Экологии"</h2>
 						<ul class="footer__list list-footer">
-							<li class="list-footer__item"><a href="#about" class="list-footer__link" data-goto="#about" data-goto-top="100">О ФРЭМЭ</a></li>
+							<li class="list-footer__item"><a href="#about" class="list-footer__link" data-goto="#about" data-goto-top="100" data-translate="About">О ФРЭМЭ</a></li>
+							<li class="list-footer__item"><a href="#committees" class="list-footer__link" data-goto="#committees" data-goto-top="100" data-translate="Committees">Комитеты</a></li>
+							<li class="list-footer__item"><a href="#topics" class="list-footer__link" data-goto="#topics" data-goto-top="100" data-translate="Topics">Тематика</a></li>
 							<li class="list-footer__item"><a href="#committees" class="list-footer__link" data-goto="#committees" data-goto-top="100">Комитеты</a></li>
-							<li class="list-footer__item"><a href="#topics" class="list-footer__link" data-goto="#topics" data-goto-top="100">Тематика</a></li>
-							<li class="list-footer__item"><a href="#committees" class="list-footer__link" data-goto="#committees" data-goto-top="100">Комитеты</a></li>
-							<li class="list-footer__item"><a href="#school" class="list-footer__link" data-goto="#school" data-goto-top="100">Школа</a></li>
-							<li class="list-footer__item"><a href="#dates" class="list-footer__link" data-goto="#dates" data-goto-top="100">Даты</a></li>
-							<li class="list-footer__item"><a href="#participants" class="list-footer__link" data-goto="#participants" data-goto-top="100">Участникам</a></li>
-							<li class="list-footer__item"><a href="#contacts" class="list-footer__link" data-goto="#contacts" data-goto-top="100">Контакты</a></li>
+							<li class="list-footer__item"><a href="#school" class="list-footer__link" data-goto="#school" data-goto-top="100" data-translate="School">Школа</a></li>
+							<li class="list-footer__item"><a href="#dates" class="list-footer__link" data-goto="#dates" data-goto-top="100" data-translate="Dates">Даты</a></li>
+							<li class="list-footer__item"><a href="#participants" class="list-footer__link" data-goto="#participants" data-goto-top="100" data-translate="Participants">Участникам</a></li>
+							<li class="list-footer__item"><a href="#contacts" class="list-footer__link" data-goto="#contacts" data-goto-top="100" data-translate="Contacts">Контакты</a></li>
 						</ul>
 					</div>
 					<div class="footer__panel">
-						<span class="footer__copyright">&copy; 2022 ФРЭМЭ. Все права защищены.</span>
-						<a href="https://teletype.link/s.konstantin" target="_blank" class="footer__developer">Разработка
+						<span class="footer__copyright" data-translate="copy">&copy; 2022 ФРЭМЭ. Все права защищены.</span>
+						<a href="https://teletype.link/s.konstantin" target="_blank" class="footer__developer" data-translate="development">Разработка
 							сайта - Konstantin.S</a>
 					</div>
 				</div>
 			</footer>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220430234716"></script>
+	<script src="js/app.min.js?_v=20221023144845"></script>
 </body>
 
 </html>
