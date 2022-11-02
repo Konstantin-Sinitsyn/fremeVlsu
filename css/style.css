@@ -755,11 +755,14 @@ body {
 .language__item {
   line-height: 22px;
   font-size: 18px;
-  color: rgba(134, 134, 134, 0.4);
+  color: rgb(100, 100, 100);
   position: relative;
 }
 .language__item:first-child {
-  margin-right: 4px;
+  padding-right: 4px;
+}
+.language__item:last-child {
+  padding-left: 4px;
 }
 .language__item:first-child::before {
   content: "";
