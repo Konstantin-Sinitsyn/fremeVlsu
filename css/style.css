@@ -156,7 +156,11 @@ html.lock {
 }
 
 /*
-
+(i) Стили будут применяться ко 
+всем классам содержащим *__container
+Например header__container, main__container и т.д.
+Снипет (HTML): cnt
+*/
 [class*=__container] {
   max-width: 86.875rem;
   box-sizing: content-box;
