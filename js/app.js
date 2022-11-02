@@ -1893,118 +1893,36 @@
                     }));
                 }
             }
-            function tabs() {
-                const tabs = document.querySelectorAll("[data-tabs]");
-                let tabsActiveHash = [];
-                if (tabs.length > 0) {
-                    const hash = getHash();
-                    if (hash && hash.startsWith("tab-")) tabsActiveHash = hash.replace("tab-", "").split("-");
-                    tabs.forEach(((tabsBlock, index) => {
-                        tabsBlock.classList.add("_tab-init");
-                        tabsBlock.setAttribute("data-tabs-index", index);
-                        tabsBlock.addEventListener("click", setTabsAction);
-                        initTabs(tabsBlock);
-                    }));
-                    let mdQueriesArray = dataMediaQueries(tabs, "tabs");
-                    if (mdQueriesArray && mdQueriesArray.length) mdQueriesArray.forEach((mdQueriesItem => {
-                        mdQueriesItem.matchMedia.addEventListener("change", (function() {
-                            setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-                        }));
-                        setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-                    }));
-                }
-                function setTitlePosition(tabsMediaArray, matchMedia) {
-                    tabsMediaArray.forEach((tabsMediaItem => {
-                        tabsMediaItem = tabsMediaItem.item;
-                        let tabsTitles = tabsMediaItem.querySelector("[data-tabs-titles]");
-                        let tabsTitleItems = tabsMediaItem.querySelectorAll("[data-tabs-title]");
-                        let tabsContent = tabsMediaItem.querySelector("[data-tabs-body]");
-                        let tabsContentItems = tabsMediaItem.querySelectorAll("[data-tabs-item]");
-                        tabsTitleItems = Array.from(tabsTitleItems).filter((item => item.closest("[data-tabs]") === tabsMediaItem));
-                        tabsContentItems = Array.from(tabsContentItems).filter((item => item.closest("[data-tabs]") === tabsMediaItem));
-                        tabsContentItems.forEach(((tabsContentItem, index) => {
-                            if (matchMedia.matches) {
-                                tabsContent.append(tabsTitleItems[index]);
-                                tabsContent.append(tabsContentItem);
-                                tabsMediaItem.classList.add("_tab-spoller");
-                            } else {
-                                tabsTitles.append(tabsTitleItems[index]);
-                                tabsMediaItem.classList.remove("_tab-spoller");
-                            }
-                        }));
-                    }));
-                }
-                function initTabs(tabsBlock) {
-                    let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-titles]>*");
-                    let tabsContent = tabsBlock.querySelectorAll("[data-tabs-body]>*");
-                    const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-                    const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
-                    if (tabsActiveHashBlock) {
-                        const tabsActiveTitle = tabsBlock.querySelector("[data-tabs-titles]>._tab-active");
-                        tabsActiveTitle ? tabsActiveTitle.classList.remove("_tab-active") : null;
-                    }
-                    if (tabsContent.length) {
-                        tabsContent = Array.from(tabsContent).filter((item => item.closest("[data-tabs]") === tabsBlock));
-                        tabsTitles = Array.from(tabsTitles).filter((item => item.closest("[data-tabs]") === tabsBlock));
-                        tabsContent.forEach(((tabsContentItem, index) => {
-                            tabsTitles[index].setAttribute("data-tabs-title", "");
-                            tabsContentItem.setAttribute("data-tabs-item", "");
-                            if (tabsActiveHashBlock && index == tabsActiveHash[1]) tabsTitles[index].classList.add("_tab-active");
-                            tabsContentItem.hidden = !tabsTitles[index].classList.contains("_tab-active");
-                        }));
-                    }
-                }
-                function setTabsStatus(tabsBlock) {
-                    let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-title]");
-                    let tabsContent = tabsBlock.querySelectorAll("[data-tabs-item]");
-                    const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-                    function isTabsAnamate(tabsBlock) {
-                        if (tabsBlock.hasAttribute("data-tabs-animate")) return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 500;
-                    }
-                    const tabsBlockAnimate = isTabsAnamate(tabsBlock);
-                    if (tabsContent.length > 0) {
-                        const isHash = tabsBlock.hasAttribute("data-tabs-hash");
-                        tabsContent = Array.from(tabsContent).filter((item => item.closest("[data-tabs]") === tabsBlock));
-                        tabsTitles = Array.from(tabsTitles).filter((item => item.closest("[data-tabs]") === tabsBlock));
-                        tabsContent.forEach(((tabsContentItem, index) => {
-                            if (tabsTitles[index].classList.contains("_tab-active")) {
-                                if (tabsBlockAnimate) _slideDown(tabsContentItem, tabsBlockAnimate); else tabsContentItem.hidden = false;
-                                if (isHash && !tabsContentItem.closest(".popup")) setHash(`tab-${tabsBlockIndex}-${index}`);
-                            } else if (tabsBlockAnimate) _slideUp(tabsContentItem, tabsBlockAnimate); else tabsContentItem.hidden = true;
-                        }));
-                    }
-                }
-                function setTabsAction(e) {
-                    const el = e.target;
-                    if (el.closest("[data-tabs-title]")) {
-                        const tabTitle = el.closest("[data-tabs-title]");
-                        const tabsBlock = tabTitle.closest("[data-tabs]");
-                        if (!tabTitle.classList.contains("_tab-active") && !tabsBlock.querySelector("._slide")) {
-                            let tabActiveTitle = tabsBlock.querySelectorAll("[data-tabs-title]._tab-active");
-                            tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter((item => item.closest("[data-tabs]") === tabsBlock)) : null;
-                            tabActiveTitle.length ? tabActiveTitle[0].classList.remove("_tab-active") : null;
-                            tabTitle.classList.add("_tab-active");
-                            setTabsStatus(tabsBlock);
-                        }
-                        e.preventDefault();
-                    }
-                }
-            }
             function menuInit() {
                 if (document.querySelector(".icon-menu")) document.addEventListener("click", (function(e) {
                     if (bodyLockStatus && e.target.closest(".icon-menu")) {
-                        bodyLockToggle();
+
                         document.querySelector(".menu__body").classList.toggle("menu-open");
                         e.target.classList.toggle("menu-open");
-                        if (document.body.style.overflowY = "hidden") document.body.style.overflowY = "scroll"; else document.body.style.overflowY = "hidden";
                     }
                 }));
             }
             function menuClose() {
-                bodyUnlock();
                 document.querySelector(".menu__body").classList.remove("menu-open");
                 document.querySelector(".menu__icon").classList.remove("menu-open");
             }
+
+            const heightHeader = document.querySelector('.header__wrapper').offsetHeight;
+            document.querySelectorAll('a[href^="#"').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let href = this.getAttribute('href').substring(1);
+                    const scrollTarget = document.getElementById(href);
+                    const topOffset = heightHeader;
+                    const elementPosition = scrollTarget.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition - topOffset;
+                    window.scrollBy({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    menuClose()
+                });
+            });
             function FLS(message) {
                 setTimeout((() => {
                     if (window.FLS) ;
@@ -2053,37 +1971,7 @@
                     }
                 }
             }
-            var smooth_scroll_polyfills_min = __webpack_require__(2);
-            let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
-                const targetBlockElement = document.querySelector(targetBlock);
-                if (targetBlockElement) {
-                    let headerItem = "";
-                    let headerItemHeight = 0;
-                    if (noHeader) {
-                        headerItem = "header.header";
-                        headerItemHeight = document.querySelector(headerItem).offsetHeight;
-                    }
-                    let options = {
-                        speedAsDuration: true,
-                        speed,
-                        header: headerItem,
-                        offset: offsetTop,
-                        easing: "easeOutQuad"
-                    };
-                    document.querySelectorAll(".menu__link").forEach((item => {
-                        item.addEventListener("click", menuClose);
-                    }));
-                    if ("undefined" !== typeof smooth_scroll_polyfills_min) (new smooth_scroll_polyfills_min).animateScroll(targetBlockElement, "", options); else {
-                        let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + scrollY;
-                        targetBlockElementPosition = headerItemHeight ? targetBlockElementPosition - headerItemHeight : targetBlockElementPosition;
-                        targetBlockElementPosition = offsetTop ? targetBlockElementPosition - offsetTop : targetBlockElementPosition;
-                        window.scrollTo({
-                            top: targetBlockElementPosition,
-                            behavior: "smooth"
-                        });
-                    }
-                } else FLS(`[gotoBlock]: Такого блока нет на странице: ${targetBlock}`);
-            };
+
             function formFieldsInit(options = {
                 viewPass: false
             }) {
@@ -2231,7 +2119,6 @@
                     } else {
                         e.preventDefault();
                         const formError = form.querySelector("._form-error");
-                        if (formError && form.hasAttribute("data-goto-error")) gotoBlock(formError, true, 1e3);
                     }
                 }
                 function formSent(form) {
@@ -6098,7 +5985,6 @@
                             const noHeader = gotoLink.hasAttribute("data-goto-header") ? true : false;
                             const gotoSpeed = gotoLink.dataset.gotoSpeed ? gotoLink.dataset.gotoSpeed : 500;
                             const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
-                            gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
                             e.preventDefault();
                         }
                     } else if ("watcherCallback" === e.type && e.detail) {
@@ -6117,11 +6003,6 @@
                             if (entry.isIntersecting) navigatorCurrentItem ? navigatorCurrentItem.classList.add("_navigator-active") : null; else navigatorCurrentItem ? navigatorCurrentItem.classList.remove("_navigator-active") : null;
                         }
                     }
-                }
-                if (getHash()) {
-                    let goToHash;
-                    if (document.querySelector(`#${getHash()}`)) goToHash = `#${getHash()}`; else if (document.querySelector(`.${getHash()}`)) goToHash = `.${getHash()}`;
-                    goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
                 }
             }
             function headerScroll() {
@@ -6162,7 +6043,7 @@
             var air_datepicker_default = __webpack_require__.n(air_datepicker);
             const index_es = air_datepicker_default();
             const en_namespaceObject = JSON.parse('{"About":"About us","Committees":"Committee","Topics":"Topics","School":"School","Dates":"Dates","Participants":"Participants","Contacts":"Contacts","support":"Informtion support","Participate":"Participate","PhRЕME":"PhRЕME`2022","pageSubtitle":"XV International Scientific Conference «Physics and Radioelectronics in Medicine and Ecology»","pageDate":"June 28 - 30, 2022","pageLocation":"Vladimir - Suzdal","aboutDescription":"The first conference \'Physics and Radioelectronics in Medicine and Ecology\' was held back in 1994. Since then, with the help of the Vladimir State University and the department Electronics, Instrument Engineering and Biotechnical Systems (EPBS) - formerly BEST, with the support of colleagues from all over the country, the conference has become a relevant multi-format scientific platform. By this time, VlSU scientists had a well-formed scientific direction in this area of knowledge. Within the framework of the conference, there is fruitful cooperation with physicians and environmentalists, as well as with leading scientists of higher and academic science both in Russia and abroad. An important milestone in the history of the conference was the year 2016. The 12th FREME conference in 2016 was held for the first time in conjunction with the 12th Russian-German Conference on Biomedical Engineering (RGC BME 2016).","aboutDetailed":"More","committeesTitle":"International Program Committee","committeesChairman":"Chairman","committeesCochair":"Co-chair","committeesDeputyChairman":"Deputy Chairman","committeesOther":"The rest of the committee members","GulyaevTitle":"Gulyaev Y.V.","GulyaevDescription":"Doctor of Physical and Mathematical Sciences, Professor, Academician of the Russian Academy of Sciences, Scientific Director of the Institute of Radio Engineering and Electronics named after V.A. Kotelnikov RAS, Moscow","OsipovTitle":"Osipov A.A.","OsipovDescription":"Candidate of Medical Sciences, Acting Director of the Department of Health of the Vladimir Region.","SushkovaTitle":"Sushkova L.T.","SushkovaDescription":"Doctor of Technical Sciences, Professor of the Department of Biomedical and Electronic Means and Technologies, Vladimir","CherepeninTitle":"Cherepenin V.A.","CherepeninDescription":"corresponding member RAS, head. Laboratory of Mathematical Methods of Radiophysics of the Institute of Radio Engineering and Electronics named after V.A. Kotelnikov RAS, Moscow;","LupyanTitle":"Lupyan E.A.","LupyanDescription":"deputy Director of IKI RAS, Moscow;","YuldashevTitle":"Yuldashev Z.M.","YuldashevDescription":"head cafe biotechnical systems, NRU \'SPbGETU\' (LETI), Doctor of Technical Sciences, Professor, St. Petersburg;","RozanovTitle":"Rozanov V.V.","RozanovDescription":"Professor of the Department of Physics of Accelerators and Radiation Medicine, Moscow State University, Doctor of Biological Sciences, Ph.D., Moscow;","SeverinTitle":"Severin A.E.","SeverinDescription":"Professor of the Department of Normal Physiology, PFUR, MD, Moscow;","NiemannTitle":"Niemann H.","NiemannDescription":"Honorary Professor of VlSU, Erlangen, Germany, Doctor of Technical Sciences, Professor;","SamorodovTitle":"Samorodov A.V.","SamorodovDescription":"head cafe \'Biomedical Technical Systems\' (BMT) of the Moscow State Technical University. N.E. Bauman, Ph.D., associate professor;","EmelianenkoTitle":"Emelianenko V.M.","EmelianenkoDescription":"Doctor of Medical Sciences, Professor, Honored Doctor of the Russian Federation, Scientific Director of LLC \'First Clinical Medical Center\'","IlyinTitle":"Ilyin A.I.","IlyinDescription":"Head of the Center for Medical Prevention, GBUZ VO \'Regional Center for Physical Therapy and Sports Medicine\' Vladimir, PhD;","MagrupovTitle":"Magrupov T. M.","MagrupovDescription":"Doctor of Technical Sciences, Professor, Professor of the Department of Biomedical Engineering, Tashkent State Technical University named after Islam Karimov","ZaichenkoTitle":"Zaichenko K.V.","ZaichenkoDescription":"Doctor of Technical Sciences, Professor, Head of the Laboratory of Radio- and Optoelectronic Devices for Bioinformatic and Genomic Technologies for Early Diagnosis of Pathologies of Living Systems, Institute of Analytical Instrumentation of the Russian Academy of Sciences, St. Petersburg;","EskofierTitle":"Escofier B.","EskofierDescription":"Professor of the Department of Computer Science of Engineering Faculty, Head of the Laboratory \'Machine Learning and Data Analysis\' Friedrich-Alexander University of Erlangen-Nuremberg, Germany;","Topics1":"1. Methods and means for diagnosing and treating diseases","Topics2":"2. Biocybernetics and mathematical modeling","Topics3":"3. Biomechanics, problems of correction and treatment of the musculoskeletal system","Topics4":"4. Infocommunication technologies in medicine and ecology","Topics5":"5. Intelligent biometric systems and technologies (scientific youth school)","Topics6":"6. Biotechnical and medical devices, systems, complexes","Topics7":"7. Methods and means of diagnosing the natural environment","Topics8":"8. Ecology and human health","schoolTitle":"Scientific youth school","schoolSubtitle":"\'Intelligent biometric systems and technologies\' named after I.N. Spiridonov.","schoolDateTitle":"Dates of the event","schoolDate":"June 28 - 30, 2022","schoolDescription":"Young researchers, graduate students and senior students of scientific and educational institutions working on topics related to such areas of research as biometrics, biomedical engineering, biotechnical systems, digital signal and image processing are invited to participate in the scientific youth session. The age of the participants must not exceed 33 years.","schoolTitleBtn":"Get acquainted with the program of the school and the list of reports of participants","schoolBtn":"Open","schoolText":"Conducting a youth school provides for the hearing and discussion of reports on the results of research work of young scientists, graduate students and students presented in the form of presentations. There are plenary review and specialized reports of leading scientists in the field of theory and practice on the subject of the youth scientific school. Based on the results of the youth school, the results of the competition of works of school participants will be summed up, followed by the recommendation of the best works for publication in publications included in the list of the Higher Attestation Commission, as well as for participation in existing programs to support and develop the scientific creativity of young people.","datesTitle":"Key dates","eventCity":"Suzdal city","eventData1":"until June 10, 2022","eventData2":"June 27, 2022","eventData3":"June 28, 2022","eventData4":"June 29, 2022","eventData5":"June 30, 2022","eventText1":"Provision of prepared materials and distribution of the conference program","eventText2":"Arrival of the conference participants","eventRegist":"Registration of conference participants","eventMeeting":"Plenary meeting","eventHallA":"Venue: Hall \'A\'","eventHallB":"Venue: Hall \'B\'","eventHallC":"Venue: Hall \'С\'","eventHallD":"Venue: Hall \'D\'","eventSchool":"(Scientific youth school)","eventLocation1":"Venue: Lobby GTK","eventCoffe":"Coffee break","eventLunch":"Lunch break","eventCultural":"Cultural program","eventSection":"Section","participantsText1":"To participate in the conference, it is necessary to issue an article in accordance with the template. ","downloadTemplate":"Download&nbsp;template&nbsp;","participantsText2":"Each article goes through 2 stages of verification:<br>•&nbsp;checking formal criteria (subject, formatting and the required data, the required level of originality is 75%);<br>•&nbsp;express review.","participantsText3":"If the article materials do not pass the formal criteria check, they are sent to the responsible author for revision.","participantsBtn":"Collections of works","programTitle":"Conference program","programText":"Get acquainted with the full program of the conference, the schedule of sections and the list of speakers","programBtn":"Check","supportDescription":"Information support is provided by the journals: «Medical technology», «Biomedical radioelectronics», «Technologies of living systems», «Biotechnosphere»","postalAddress":"Postal address","telephone":"Telephone","сontactQuestions":"For all organizational questions, please contact","copy":"&copy; 2022 FREME. All rights reserved.","development":"Website development - Konstantin.S","registrationParticipants":"CONFERENCE PARTICIPANT REGISTRATION","participantInformation":"Participant information:","authorParticipan":"AUTHOR PARTICIPANT (FULL NAME):","emailAddress":"E-MAIL ADDRESS:","organization":"ORGANIZATION:","city":"CITY:","post":"POST:","academicDegree":"ACADEMIC DEGREE/RANK:","back":"Back","articleInfo":"Article info:","articleTitleRu":"ARTICLE TITLE(RU):","articleTitleRuHelp":"Specify the title of the article in Russian","articleTitleEn":"ARTICLE TITLE(EN):","articleTitleEnHelp":"Specify the title of the article in English","informationAboutAuthorsRu":"INFORMATION ABOUT AUTHORS(RU):","informationAboutAuthorsEn":"INFORMATION ABOUT AUTHORS(EN):","organizationCityAuthorRu:":"ORGANIZATION/CITY OF AUTHOR(RU):","organizationCityAuthorRuHelp":"Indicate the organization and city of the authors in Russian. For example:<br>1. Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный Университет,С.-Петербург","organizationCityAuthorEn":"ORGANIZATION/CITY OF AUTHORS(EN):","organizationCityAuthorEnHelp":"Indicate the organization and city of the authors in English. For example:<br>1. Moscow State University, Moscow<br>2. S.-Petersburg State University, S.-Petersburg","informationForm":"Information about the form of participation","typeParticipation":"TYPE OF PARTICIPATION:","select":"Select","speaker":"Speaker","listener":"Listener","hotel":"HOTEL NEEDED","bookingDates":"CHOOSE YOUR HOTEL BOOKING DATES:","attachFiles":"Attach files:","fileArticle":"FILE ARTICLE:","fileSummary":"FILE SUMMARY:","examinationAct":"EXAMINATION ACT:","registrationPayment:":"Registration fee payment:","paymentDetails":"<b>Details for paying the registration fee:</b>Р/с № 40703810910020100121 во Владимирском ОСБ №8611 РФ г. Владимира, БИК 041708602, к/с 30101810000000000602, получатель платежа – Владимирская региональная общественная организация РНТО РЭС им. А.С.Попова, ИНН 3327702155/КПП 332701001, с пометкой «Оргвзнос за участие в конференции ФРЭМЭ’2022».","conferenceParticipants":"For conference participants","youngScientists":"For young scientists","absenteeParticipation":"Absentee participation","foreignParticipants":"For foreign participants","checkPayment":"CHECK FOR PAYMENT OF THE REGISTRATION FEE","send":"Send","personalData":"By clicking on the button you confirm your consent to the processing <a class=\'form-group__link\' href=\'privacy.html\' target=\'__blank\'>personal&nbsp;data</a>."}');
-            const ru_namespaceObject = JSON.parse('{"About":"О ФРЭМЭ","Committees":"Комитет","Topics":"Тематика","School":"Школа","Dates":"Даты","Participants":"Участникам","Contacts":"Контакты","support":"Информационная поддержка","Participate":"Принять участие","PhRЕME":"ФРЭМЭ`2022","pageSubtitle":"XV Международная Научная Конференция «Физика и Радиоэлектроника в Медицине и Экологии»","pageDate":"28 - 30 июня 2022","pageLocation":"Владимир - Суздаль","aboutDescription":"Первая конференция «Физика и Радиоэлектроника в Медицине и Экологии» прошла в далёком 1994 году.С тех пор силами Владимирского Государственного Университета и кафедры Электроники, приборостроения и биотехнических систем(ЭПБС) - ранее БЭСТ, при поддержке коллег со всей страны конференция стала актуальной многоформатной научной платформой.К этому времени ученые ВлГУ имели сформировавшееся научное направление в этой области знаний.В рамках конференции происходит плодотворное сотрудничество с медиками и экологами, а также с ведущими учеными вузовской и академической науки как России, так и зарубежных стран.Важным этапом в истории конференции стал 2016 год .12 - я конференция ФРЭМЭ в 2016 году впервые проводилась совместно с 12 - й Российско - германской конференцией по биомедицинской инженерии(RGC BME 2016).","aboutDetailed":"Подробнее","committeesTitle":"Международный Программный Комитет","committeesChairman":"Председатель","committeesCochair":"Сопредседатель","committeesDeputyChairman":"Зам.председателя","committeesOther":"Остальные члены комитета","GulyaevTitle":"Гуляев Ю.В.","GulyaevDescription":"д.ф-м.н.,профессор, академик РАН, научный руководитель Института радиотехники и электроники имени В.А. Котельникова РАН, г. Москва","OsipovTitle":"Осипов А.А.","OsipovDescription":"к.м.н.,и.о. директора Департамента здравоохранения Владимирской области.","SushkovaTitle":"Сушкова Л.Т.","SushkovaDescription":"д.т.н., профессор кафедры биомедицинских и электронных средств и технологий, г. Владимир","CherepeninTitle":"Черепенин В.А.","CherepeninDescription":"чл.-корр. РАН, зав. лабораторией математических методов радиофизики Института радиотехники и электроники имени В.А. Котельникова РАН, г. Москва;","LupyanTitle":"Лупян Е.А.","LupyanDescription":"зам. директора ИКИ РАН, г. Москва;","YuldashevTitle":"Юлдашев З.М.","YuldashevDescription":"зав. каф. биотехнических систем, НИУ «СПбГЭТУ» (ЛЭТИ), д.т.н., проф., г. Санкт-Петербург;","RozanovTitle":"Розанов В.В.","RozanovDescription":"профессор кафедры физики ускорителей и радиационной медицины, МГУ, д.б.н., к.ф-м.н., г. Москва;","SeverinTitle":"Северин А.Е.","SeverinDescription":"профессор кафедры нормальной физиологии, РУДН, д.м.н., г. Москва;","NiemannTitle":"Ниманн Х.","NiemannDescription":"почётный профессор ВлГУ, г. Эрланген, Германия, д.т.н., профессор;","SamorodovTitle":"Самородов А.В.","SamorodovDescription":"зав. каф. «Биомедицинские технические системы» (БМТ) Московского государственного технического университета им. Н.Э.Баумана, к.т.н., доцент;","EmelianenkoTitle":"Емельяненко В.М.","EmelianenkoDescription":"доктор медицинских наук, профессор, Заслуженный врач РФ, научный руководитель ООО \'Первый клинический медицинский центр\'","IlyinTitle":"Ильин А. И.","IlyinDescription":"заведующий центром медицинской профилактики ГБУЗ ВО «Областной центр лечебной физкультуры и спортивной медицины»,г. Владимир, к.м.н.;","MagrupovTitle":"Магрупов Т. М.","MagrupovDescription":"д.т.н., профессор, профессор кафедры Биомедицинской инженерии Ташкентского государственного технического университета им.Ислама Каримова","ZaichenkoTitle":"Зайченко К.В.","ZaichenkoDescription":"д.т.н., профессор, Заведующий лабораторией радио- и оптоэлектронных приборов для биоинформационных и геномных технологий ранней диагностики патологий живых систем, Институт аналитического приборостроения РАН, Санкт-Петербург;","EskofierTitle":"Eskofier B.","EskofierDescription":"профессор отделения компьютерных наук технического факультета, руководитель лаборатории «Машинное обучение и анализ данных» Фридрих-Александра Университета Эрланген-Нюрнберг, Германия;","Topics1":"1. Методы и средства диагностики и лечения заболеваний","Topics2":"2. Биокибернетика и математическое моделирование","Topics3":"3. Биомеханика, проблемы коррекции и лечения опорно-двигательного аппарата","Topics4":"4. Инфокоммуникационные технологии в медицине и экологии","Topics5":"5. Интеллектуальные биометрические системы и технологии (научная молодежная школа)","Topics6":"6. Биотехнические и медицинские аппараты, системы, комплексы","Topics7":"7. Методы и средства диагностики природной среды","Topics8":"8. Экология и здоровье человека","schoolTitle":"Научная молодежная школа","schoolSubtitle":"“Интеллектуальные биометрические системы и технологии” имени И.Н.Спиридонова.","schoolDateTitle":"Даты проведения","schoolDate":"28 - 30 июня 2022","schoolDescription":"К участию в научной молодёжной сессии приглашаются молодые научные сотрудники, аспиранты и студенты старших курсов научных и образовательных учреждений, работающие по тематикам, связанным с такими направлениями исследований как биометрия, биомедицинская инженерия, биотехнические системы, цифровая обработка сигналов и изображений. Возраст участников не должен превышать 33 лет.","schoolTitleBtn":"Ознакомиться с программой школы и списком докладов участников","schoolBtn":"Открыть","schoolText":"Проведение молодежной школы предусматривает заслушивание и обсуждение докладов по результатам научно-исследовательских работ молодых ученых, аспирантов и студентов, представленных в виде презентаций. Предусмотрены пленарные обзорные и специализированные доклады ведущих ученых в области теории и практики по тематике молодежной научной школы. По результатам проведения молодежной школы будут подведены итоги конкурса работ участников школы с последующей рекомендацией лучших работ к публикации в изданиях, входящих в перечень ВАК, а также к участию в действующих программах поддержки и развития научного творчества молодежи.","datesTitle":"Ключевые даты","eventCity":"г.Суздаль","eventData1":"до 10 июня 2022","eventData2":"27 июня 2022","eventData3":"28 июня 2022","eventData4":"29 июня 2022","eventData5":"30 июня 2022","eventText1":"Предоставления оформленных материалов и рассылка программы конференции","eventText2":"Заезд участников конференции","eventRegist":"Регистрация участников конференции","eventMeeting":"Пленарное заседание","eventHallA":"Место проведение: Зал \'A\'","eventHallB":"Место проведение: Зал \'B\'","eventHallC":"Место проведение: Зал \'C\'","eventHallD":"Место проведение: Зал \'D\'","eventSchool":"(Научная молодежная школа)","eventLocation1":"Место проведение: Вестибюль ГТК","eventCoffe":"Кофе-брейк","eventLunch":"Перерыв на обед","eventCultural":"Культурная программа","eventSection":"Секция","participantsText1":"To participate in the conference, it is necessary to issue an article in accordance with the template. ","downloadTemplate":"Download&nbsp;template&nbsp;","participantsText2":"Each article goes through 2 stages of verification:<br>•&nbsp;checking formal criteria (subject, formatting and the required data, the required level of originality is 75%);<br>•&nbsp;express review.","participantsText3":"If the article materials do not pass the formal criteria check, they are sent to the responsible author for revision.","participantsBtn":"Collections of works","programTitle":"Программа конференции","programText":"Get acquainted with the full program of the conference, the schedule of sections and the list of speakers","programBtn":"Ознакомиться","supportDescription":"Информационная поддержка обеспечивается журналами: «Медицинская техника», «Биомедицинская радиоэлектроника», «Технологии живых систем», «Биотехносфера»","postalAddress":"Почтовый адрес","telephone":"Телефон","сontactQuestions":"По всем орг. вопросам обращайтесь по адресу","copy":"&copy; 2022 ФРЭМЭ. Все права защищены.","development":"Разработка сайта - Konstantin.S","registrationParticipants":"Регистрация участников конференции","participantInformation":"Информация об участнике:","authorParticipan":"АВТОР УЧАСТНИК (ФИО):","emailAddress":"АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ:","organization":"ОРГАНИЗАЦИЯ:","city":"ГОРОД:","post":"ДОЛЖНОСТЬ:","academicDegree":"УЧЁНАЯ СТЕПЕНЬ/ЗВАНИЕ:","back":"Назад","articleInfo":"Информация о статье:","articleTitleRu":"НАЗВАНИЕ СТАТЬИ(RU):","articleTitleRuHelp":"Укажите название статьи на русском языке","articleTitleEn":"НАЗВАНИЕ СТАТЬИ(EN):","articleTitleEnHelp":"Укажите название статьи на английском языке","informationAboutAuthorsRu":"ИНФОРМАЦИЯ ОБ АВТОРАХ(RU):","informationAboutAuthorsEn":"ИНФОРМАЦИЯ ОБ АВТОРАХ(EN):","organizationCityAuthorRu":"ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(RU):","organizationCityAuthorRuHelp":"Укажите организацию и город авторов на русском языке.Например:<br>1. Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный Университет,С.-Петербург","organizationCityAuthorEn":"ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(EN):","organizationCityAuthorEnHelp":"Укажите организацию и город авторов на английском языке.Например:<br>1. Moscow State University,Moscow<br>2. S.-PetersburgStateUniversity,S.-Petersburg","informationForm":"Информация о форме участия:","typeParticipation":"ВИД УЧАСТИЯ:","select":"Выбрать","speaker":"Докладчик","listener":"Слушатель","hotel":"НУЖНА ГОСТИНИЦА","bookingDates":"ВЫБЕРИТЕ ДАТЫ БРОНИРОВАНИЯ ГОСТИНИЦЫ:","attachFiles":"Прикрепить файлы:","fileArticle":"ФАЙЛ СТАТЬИ:","fileSummary":"ФАЙЛ АННОТАЦИИ:","examinationAct":"АКТ ЭКСПЕРТИЗЫ:","registrationPayment":"Оплата оргвзноса:","paymentDetails":"<b>Реквизиты для оплаты оргвзноса:</b>Р/с № 40703810910020100121 во Владимирском ОСБ №8611 РФ г. Владимира, БИК 041708602, к/с 30101810000000000602, получатель платежа – Владимирская региональная общественная организация РНТО РЭС им. А.С.Попова, ИНН 3327702155/КПП 332701001, с пометкой «Оргвзнос за участие в конференции ФРЭМЭ’2022».","conferenceParticipants":"Для участников конференции","youngScientists":"Для молодых ученых(до 33 лет) и апирантов(при предоставления удостоерения)","absenteeParticipation":"Заочное участие","foreignParticipants":"Для иностранных участников","checkPayment":"ЧЕК ОБ ОПЛАТЕ ОРГВЗНОСА:","send":"Отправить","personalData":"Нажимая на кнопку вы подтверждаете свое согласие на обработку <a class=\'form-group__link\' href=\'privacy.html\' target=\'__blank\'>персональных&nbsp;данных</a>.","":""}');
+            const ru_namespaceObject = JSON.parse('{"About":"О ФРЭМЭ","Committees":"Комитет","Topics":"Тематика","School":"Школа","Dates":"Даты","Participants":"Участникам","Contacts":"Контакты","support":"Информационная поддержка","Participate":"Принять участие","PhRЕME":"ФРЭМЭ`2022","pageSubtitle":"XV Международная Научная Конференция «Физика и Радиоэлектроника в Медицине и Экологии»","pageDate":"28 - 30 июня 2022","pageLocation":"Владимир - Суздаль","aboutDescription":"Первая конференция «Физика и Радиоэлектроника в Медицине и Экологии» прошла в далёком 1994 году.С тех пор силами Владимирского Государственного Университета и кафедры Электроники, приборостроения и биотехнических систем(ЭПБС) - ранее БЭСТ, при поддержке коллег со всей страны конференция стала актуальной многоформатной научной платформой.К этому времени ученые ВлГУ имели сформировавшееся научное направление в этой области знаний.В рамках конференции происходит плодотворное сотрудничество с медиками и экологами, а также с ведущими учеными вузовской и академической науки как России, так и зарубежных стран.Важным этапом в истории конференции стал 2016 год .12 - я конференция ФРЭМЭ в 2016 году впервые проводилась совместно с 12 - й Российско - германской конференцией по биомедицинской инженерии(RGC BME 2016).","aboutDetailed":"Подробнее","committeesTitle":"Международный Программный Комитет","committeesChairman":"Председатель","committeesCochair":"Сопредседатель","committeesDeputyChairman":"Зам.председателя","committeesOther":"Остальные члены комитета","GulyaevTitle":"Гуляев Ю.В.","GulyaevDescription":"д.ф-м.н.,профессор, академик РАН, научный руководитель Института радиотехники и электроники имени В.А. Котельникова РАН, г. Москва","OsipovTitle":"Осипов А.А.","OsipovDescription":"к.м.н.,и.о. директора Департамента здравоохранения Владимирской области.","SushkovaTitle":"Сушкова Л.Т.","SushkovaDescription":"д.т.н., профессор кафедры биомедицинских и электронных средств и технологий, г. Владимир","CherepeninTitle":"Черепенин В.А.","CherepeninDescription":"чл.-корр. РАН, зав. лабораторией математических методов радиофизики Института радиотехники и электроники имени В.А. Котельникова РАН, г. Москва;","LupyanTitle":"Лупян Е.А.","LupyanDescription":"зам. директора ИКИ РАН, г. Москва;","YuldashevTitle":"Юлдашев З.М.","YuldashevDescription":"зав. каф. биотехнических систем, НИУ «СПбГЭТУ» (ЛЭТИ), д.т.н., проф., г. Санкт-Петербург;","RozanovTitle":"Розанов В.В.","RozanovDescription":"профессор кафедры физики ускорителей и радиационной медицины, МГУ, д.б.н., к.ф-м.н., г. Москва;","SeverinTitle":"Северин А.Е.","SeverinDescription":"профессор кафедры нормальной физиологии, РУДН, д.м.н., г. Москва;","NiemannTitle":"Ниманн Х.","NiemannDescription":"почётный профессор ВлГУ, г. Эрланген, Германия, д.т.н., профессор;","SamorodovTitle":"Самородов А.В.","SamorodovDescription":"зав. каф. «Биомедицинские технические системы» (БМТ) Московского государственного технического университета им. Н.Э.Баумана, к.т.н., доцент;","EmelianenkoTitle":"Емельяненко В.М.","EmelianenkoDescription":"доктор медицинских наук, профессор, Заслуженный врач РФ, научный руководитель ООО \'Первый клинический медицинский центр\'","IlyinTitle":"Ильин А. И.","IlyinDescription":"заведующий центром медицинской профилактики ГБУЗ ВО «Областной центр лечебной физкультуры и спортивной медицины»,г. Владимир, к.м.н.;","MagrupovTitle":"Магрупов Т. М.","MagrupovDescription":"д.т.н., профессор, профессор кафедры Биомедицинской инженерии Ташкентского государственного технического университета им.Ислама Каримова","ZaichenkoTitle":"Зайченко К.В.","ZaichenkoDescription":"д.т.н., профессор, Заведующий лабораторией радио- и оптоэлектронных приборов для биоинформационных и геномных технологий ранней диагностики патологий живых систем, Институт аналитического приборостроения РАН, Санкт-Петербург;","EskofierTitle":"Eskofier B.","EskofierDescription":"профессор отделения компьютерных наук технического факультета, руководитель лаборатории «Машинное обучение и анализ данных» Фридрих-Александра Университета Эрланген-Нюрнберг, Германия;","Topics1":"1. Методы и средства диагностики и лечения заболеваний","Topics2":"2. Биокибернетика и математическое моделирование","Topics3":"3. Биомеханика, проблемы коррекции и лечения опорно-двигательного аппарата","Topics4":"4. Инфокоммуникационные технологии в медицине и экологии","Topics5":"5. Интеллектуальные биометрические системы и технологии (научная молодежная школа)","Topics6":"6. Биотехнические и медицинские аппараты, системы, комплексы","Topics7":"7. Методы и средства диагностики природной среды","Topics8":"8. Экология и здоровье человека","schoolTitle":"Научная молодежная школа","schoolSubtitle":"“Интеллектуальные биометрические системы и технологии” имени И.Н.Спиридонова.","schoolDateTitle":"Даты проведения","schoolDate":"28 - 30 июня 2022","schoolDescription":"К участию в научной молодёжной сессии приглашаются молодые научные сотрудники, аспиранты и студенты старших курсов научных и образовательных учреждений, работающие по тематикам, связанным с такими направлениями исследований как биометрия, биомедицинская инженерия, биотехнические системы, цифровая обработка сигналов и изображений. Возраст участников не должен превышать 33 лет.","schoolTitleBtn":"Ознакомиться с программой школы и списком докладов участников","schoolBtn":"Открыть","schoolText":"Проведение молодежной школы предусматривает заслушивание и обсуждение докладов по результатам научно-исследовательских работ молодых ученых, аспирантов и студентов, представленных в виде презентаций. Предусмотрены пленарные обзорные и специализированные доклады ведущих ученых в области теории и практики по тематике молодежной научной школы. По результатам проведения молодежной школы будут подведены итоги конкурса работ участников школы с последующей рекомендацией лучших работ к публикации в изданиях, входящих в перечень ВАК, а также к участию в действующих программах поддержки и развития научного творчества молодежи.","datesTitle":"Ключевые даты","eventCity":"г.Суздаль","eventData1":"до 10 июня 2022","eventData2":"27 июня 2022","eventData3":"28 июня 2022","eventData4":"29 июня 2022","eventData5":"30 июня 2022","eventText1":"Предоставления оформленных материалов и рассылка программы конференции","eventText2":"Заезд участников конференции","eventRegist":"Регистрация участников конференции","eventMeeting":"Пленарное заседание","eventHallA":"Место проведение: Зал \'A\'","eventHallB":"Место проведение: Зал \'B\'","eventHallC":"Место проведение: Зал \'C\'","eventHallD":"Место проведение: Зал \'D\'","eventSchool":"(Научная молодежная школа)","eventLocation1":"Место проведение: Вестибюль ГТК","eventCoffe":"Кофе-брейк","eventLunch":"Перерыв на обед","eventCultural":"Культурная программа","eventSection":"Секция","participantsText1":"Для участие в конференции необходимо оформить статью в соответствии с шаблоном.","downloadTemplate":"Скачать&nbsp;шаблон&nbsp;","participantsText2":"Каждая статья проходит 2 этапа проверки:<br>•&nbsp;проверка формальных критериев (тематика, проверка форматирования и наличия необходимых данных, требуемый уровень оригинальности 75%);<br>•&nbsp;экспресс-рецензирование;","participantsText3":"Если материалы статьи не проходят проверку формальных критериев, то они отправляются ответственному автору на доработку.","participantsBtn":"Сборники трудов","programTitle":"Программа конференции","programText":"Ознакомиться с полной программой конференции, расписанием секций и списком докладчиком","programBtn":"Ознакомиться","supportDescription":"Информационная поддержка обеспечивается журналами: «Медицинская техника», «Биомедицинская радиоэлектроника», «Технологии живых систем», «Биотехносфера»","postalAddress":"Почтовый адрес","telephone":"Телефон","сontactQuestions":"По всем орг. вопросам обращайтесь по адресу","copy":"&copy; 2022 ФРЭМЭ. Все права защищены.","development":"Разработка сайта - Konstantin.S","registrationParticipants":"Регистрация участников конференции","participantInformation":"Информация об участнике:","authorParticipan":"АВТОР УЧАСТНИК (ФИО):","emailAddress":"АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ:","organization":"ОРГАНИЗАЦИЯ:","city":"ГОРОД:","post":"ДОЛЖНОСТЬ:","academicDegree":"УЧЁНАЯ СТЕПЕНЬ/ЗВАНИЕ:","back":"Назад","articleInfo":"Информация о статье:","articleTitleRu":"НАЗВАНИЕ СТАТЬИ(RU):","articleTitleRuHelp":"Укажите название статьи на русском языке","articleTitleEn":"НАЗВАНИЕ СТАТЬИ(EN):","articleTitleEnHelp":"Укажите название статьи на английском языке","informationAboutAuthorsRu":"ИНФОРМАЦИЯ ОБ АВТОРАХ(RU):","informationAboutAuthorsEn":"ИНФОРМАЦИЯ ОБ АВТОРАХ(EN):","organizationCityAuthorRu":"ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(RU):","organizationCityAuthorRuHelp":"Укажите организацию и город авторов на русском языке.Например:<br>1. Московский Государственный Университет,Москва<br>2. С.-Петербургский Государственный Университет,С.-Петербург","organizationCityAuthorEn":"ОРГАНИЗАЦИЯ/ГОРОД АВТОРОВ(EN):","organizationCityAuthorEnHelp":"Укажите организацию и город авторов на английском языке.Например:<br>1. Moscow State University,Moscow<br>2. S.-PetersburgStateUniversity,S.-Petersburg","informationForm":"Информация о форме участия:","typeParticipation":"ВИД УЧАСТИЯ:","select":"Выбрать","speaker":"Докладчик","listener":"Слушатель","hotel":"НУЖНА ГОСТИНИЦА","bookingDates":"ВЫБЕРИТЕ ДАТЫ БРОНИРОВАНИЯ ГОСТИНИЦЫ:","attachFiles":"Прикрепить файлы:","fileArticle":"ФАЙЛ СТАТЬИ:","fileSummary":"ФАЙЛ АННОТАЦИИ:","examinationAct":"АКТ ЭКСПЕРТИЗЫ:","registrationPayment":"Оплата оргвзноса:","paymentDetails":"<b>Реквизиты для оплаты оргвзноса:</b>Р/с № 40703810910020100121 во Владимирском ОСБ №8611 РФ г. Владимира, БИК 041708602, к/с 30101810000000000602, получатель платежа – Владимирская региональная общественная организация РНТО РЭС им. А.С.Попова, ИНН 3327702155/КПП 332701001, с пометкой «Оргвзнос за участие в конференции ФРЭМЭ’2022».","conferenceParticipants":"Для участников конференции","youngScientists":"Для молодых ученых(до 33 лет) и апирантов(при предоставления удостоерения)","absenteeParticipation":"Заочное участие","foreignParticipants":"Для иностранных участников","checkPayment":"ЧЕК ОБ ОПЛАТЕ ОРГВЗНОСА:","send":"Отправить","personalData":"Нажимая на кнопку вы подтверждаете свое согласие на обработку <a class=\'form-group__link\' href=\'privacy.html\' target=\'__blank\'>персональных&nbsp;данных</a>.","":""}');
             new index_es("#datepicker", {
                 range: true,
                 multipleDatesSeparator: " - ",
@@ -6260,7 +6141,6 @@
             menuInit();
             fullVHfix();
             spollers();
-            tabs();
             formFieldsInit({
                 viewPass: false
             });
@@ -6310,4 +6190,4 @@
         __webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
     })();
     __webpack_require__(802);
-})();
+})(); 
